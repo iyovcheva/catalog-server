@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<!-- Brooklyn SHA-1: GIT_SHA_1 -->
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brooklyn Central: catalog of entities, examples, and tools for Apache Brooklyn">
+
+    <title>Brooklyn Central</title>
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="header" role="navigation">
+      <div class="container-and-sidebars">
+      
+        <div class="container-sidebar-left feather">
+          <a href="http://brooklyn.io/">
+            <img src="/assets/img/feather.png" alt="[Apache Brooklyn]" width="80" class="flip navbar-feather">
+          </a>
+        </div>
+        
+        <div class="container container-between-sidebars top-menu">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/assets/img/apache-brooklyn-logo-244px-wide.png" alt="brooklyn">
+                    <div class="catalog-title">CENTRAL CATALOG</div>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#repos" class="nav1 nav1_repos">Repositories</a></li>
+                            <li><a href="#examples" class="nav1 nav1_examples">Examples</a></li>
+                            <li><a href="#tools" class="nav1 nav1_tools">Tools</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </div><!-- /.container -->
+        
+        <div class="container-sidebar-right">
+          <div class="navbar-sidebar-right-icons">
+            <a href="https://twitter.com/#!/search?q=brooklyncentral" class="navbar-icon navbar-icon-shift icon-twitter"
+              data-toggle="tooltip" data-placement="bottom" title="Twitter: @brooklyncentral"/>
+            <a href="http://webchat.freenode.net/?channels=brooklyncentral" class="navbar-icon icon-irc"
+              data-toggle="tooltip" data-placement="bottom" title="IRC: freenode #brooklyncentral"/>
+            <!-- extra a element seems needed as landing page seems to copy the last element here (!?) 
+            -->
+            <a href="/" style="width: 0px; height: 0px;"></a>
+          </div>
+       </div>
+      
+     </div>
+   </nav>
+
+
+  <div class="container" id="main-content">
+    <div id="application-content"></div>
+  </div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 text-muted">
+                Brooklyn Central is a catalog of blueprint repositories, examples, and ecosystem tools.
+                <br />
+                <a href="http://brooklyn.io/">Apache Brooklyn</a> is an Apache Software Foundation Incubation project..
+            </div>
+            <div class="col-md-2">
+                &copy; 2015 <a href="http://www.cloudsoftcorp.com">Cloudsoft</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- load our code with require.js. data-main is replaced with optimised file at build -->
+<script type="text/javascript" data-main="assets/config.js" src="assets/deps/require.js"></script>
+
+</body>
+</html>

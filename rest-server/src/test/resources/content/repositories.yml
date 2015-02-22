@@ -1,0 +1,7 @@
+- url: catalog-test-content:test-user/foo
+  
+#- github:user/repo
+
+#- url: http://github.com/user/repo/master/path/to/folder/
+#  name: folder
+#  owner: user

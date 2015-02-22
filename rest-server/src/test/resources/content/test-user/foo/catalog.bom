@@ -1,0 +1,8 @@
+services:
+- type: brooklyn.entity.basic.BasicEntity
+  brooklyn.config:
+    foo: bar
+
+brooklyn.catalog:
+  id: foo
+  version: 1.0

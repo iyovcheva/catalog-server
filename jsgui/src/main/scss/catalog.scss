@@ -1,0 +1,17 @@
+
+// to install into src for testing in java:
+
+// mvn sass:update-stylesheets
+// cp target/jsgui-0.7.0-SNAPSHOT/assets/css/catalog.css src/main/webapp/assets/css/
+  
+$style_dir: "/assets/css";
+
+@import 'init';
+@import 'util';
+@import 'basic';
+@import 'tooltips';
+@import 'code_blocks';
+@import 'menu';
+@import 'search';
+@import 'footer';
+@import 'main_container';
