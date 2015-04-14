@@ -1,4 +1,13 @@
 
-  REPO <%= trail %>
+REPO <%= trail %>
+  
+<% if (repo) { %>
   <hr/>
   <%= repo.get("url") %>
+  <br/>
+  <br/>
+  <pre><%= repo.get("bomText") %></pre>
+<% } else { %>
+  <br/>
+  (loading)
+<% } %>

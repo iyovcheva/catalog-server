@@ -4,5 +4,5 @@ services:
     foo: bar
 
 brooklyn.catalog:
-  id: foo
+  id: foo1
   version: 1.0

@@ -1,8 +1,9 @@
-package org.brooklyncentral.catalog.rest.server;
+package org.brooklyncentral.catalog.model;
 
 import java.net.URL;
 import java.util.Map;
 
+import org.brooklyncentral.catalog.rest.server.CatalogRestApiLauncher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,7 +28,7 @@ public class RepositoriesListTest {
 
     @Test
     public void testGitHubWithBrooklynCentral() {
-        RepositoriesList rl = check("[ 'github:user/repo/baz/brooklyn-central-catalog/' ]", "user", "baz");
+        RepositoryLinkList rl = check("[ 'github:user/repo/baz/brooklyn-central-catalog/' ]", "user", "baz");
         Assert.assertEquals(rl.asList().get(0).get("url"), "https://github.com/user/repo/baz/brooklyn-central-catalog/");
     }
 
@@ -42,8 +43,8 @@ public class RepositoriesListTest {
         check(Streams.readFullyString(new URL("catalog-test-content:repositories.yml").openStream()), "test-user", "foo");
     }
     
-    private RepositoriesList check(String content, String owner1, String name1) {
-        RepositoriesList rl = RepositoriesList.newInstance(content);
+    private RepositoryLinkList check(String content, String owner1, String name1) {
+        RepositoryLinkList rl = RepositoryLinkList.newInstance(content);
         Map<String, String> r1 = rl.iterator().next();
         if (owner1!=null) Assert.assertEquals(r1.get("owner"), owner1);
         if (name1!=null) Assert.assertEquals(r1.get("name"), name1);

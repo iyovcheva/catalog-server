@@ -25,6 +25,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -35,9 +36,24 @@ import javax.ws.rs.core.MediaType;
 public interface MainApi {
 
     @GET
-    @Path("/repositories")
+    @Path("/repos")
     public List<Map<String,String>> listRepositories(
             @QueryParam("regex") @DefaultValue("") String regex,
             @QueryParam("fragment") @DefaultValue("") String fragment);
+
+    /** Returns detailed info for a repository */
+    @GET
+    @Path("/repo/{ownerName}/{repoName}")
+    public Map<String,Object> getRepo(
+        @PathParam("ownerName") final String ownerName,
+        @PathParam("repoName") final String repoName);
+
+    /** Returns the primary catalog */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/repo/{ownerName}/{repoName}/catalog")
+    public String getRepoCatalog(
+        @PathParam("ownerName") final String ownerName,
+        @PathParam("repoName") final String repoName);
 
 }

@@ -43,7 +43,8 @@ define([
                     this.currentView.close();
                 }
                 // render the view inside the selector element
-                $(selector).html(view.render().el);
+                view.render()
+                $(selector).html(view.el);
                 this.currentView = view;
                 return view
         },
