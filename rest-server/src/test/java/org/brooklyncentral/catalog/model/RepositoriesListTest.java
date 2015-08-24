@@ -3,11 +3,10 @@ package org.brooklyncentral.catalog.model;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.brooklyn.util.stream.Streams;
 import org.brooklyncentral.catalog.rest.server.CatalogRestApiLauncher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import brooklyn.util.stream.Streams;
 
 public class RepositoriesListTest {
 

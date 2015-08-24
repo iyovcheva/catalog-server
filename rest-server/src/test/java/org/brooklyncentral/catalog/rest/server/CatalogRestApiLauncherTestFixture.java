@@ -18,11 +18,10 @@
  */
 package org.brooklyncentral.catalog.rest.server;
 
+import org.apache.brooklyn.util.exceptions.Exceptions;
 import org.eclipse.jetty.server.Server;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-
-import brooklyn.util.exceptions.Exceptions;
 
 public abstract class CatalogRestApiLauncherTestFixture {
 

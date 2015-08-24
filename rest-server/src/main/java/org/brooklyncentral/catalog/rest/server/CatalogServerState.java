@@ -4,11 +4,10 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.brooklyncentral.catalog.model.Repository;
 import org.brooklyncentral.catalog.model.RepositoryLink;
 import org.brooklyncentral.catalog.model.RepositoryLinkList;
-
-import brooklyn.util.collections.MutableMap;
 
 public class CatalogServerState {
 

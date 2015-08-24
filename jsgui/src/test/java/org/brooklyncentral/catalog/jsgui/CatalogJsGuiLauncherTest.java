@@ -18,11 +18,10 @@
  */
 package org.brooklyncentral.catalog.jsgui;
 
+import org.apache.brooklyn.test.HttpTestUtils;
 import org.eclipse.jetty.server.Server;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
-import brooklyn.test.HttpTestUtils;
 
 /** Convenience and demo for launching programmatically. */
 public class CatalogJsGuiLauncherTest {

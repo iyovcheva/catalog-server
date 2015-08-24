@@ -3,11 +3,11 @@ package org.brooklyncentral.catalog.model;
 import java.net.URL;
 import java.util.Map;
 
-import brooklyn.util.exceptions.Exceptions;
-import brooklyn.util.net.Urls;
-import brooklyn.util.stream.Streams;
-import brooklyn.util.text.Strings;
-import brooklyn.util.yaml.Yamls;
+import org.apache.brooklyn.util.exceptions.Exceptions;
+import org.apache.brooklyn.util.net.Urls;
+import org.apache.brooklyn.util.stream.Streams;
+import org.apache.brooklyn.util.text.Strings;
+import org.apache.brooklyn.util.yaml.Yamls;
 
 public class Repository {
 

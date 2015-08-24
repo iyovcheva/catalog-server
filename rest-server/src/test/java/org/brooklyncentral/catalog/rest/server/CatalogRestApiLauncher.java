@@ -34,6 +34,11 @@ import java.util.List;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
+import org.apache.brooklyn.api.mgmt.ManagementContext;
+import org.apache.brooklyn.util.exceptions.Exceptions;
+import org.apache.brooklyn.util.net.Networking;
+import org.apache.brooklyn.util.net.Urls;
+import org.apache.brooklyn.util.text.WildcardGlobs;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -42,12 +47,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import brooklyn.management.ManagementContext;
-import brooklyn.util.exceptions.Exceptions;
-import brooklyn.util.net.Networking;
-import brooklyn.util.net.Urls;
-import brooklyn.util.text.WildcardGlobs;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Charsets;

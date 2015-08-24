@@ -8,12 +8,11 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.brooklyncentral.catalog.model.Repository;
 import org.brooklyncentral.catalog.model.RepositoryLinkList;
 import org.brooklyncentral.catalog.rest.api.MainApi;
 import org.brooklyncentral.catalog.rest.server.CatalogServerState;
-
-import brooklyn.util.collections.MutableMap;
 
 public class MainResource implements MainApi {
 

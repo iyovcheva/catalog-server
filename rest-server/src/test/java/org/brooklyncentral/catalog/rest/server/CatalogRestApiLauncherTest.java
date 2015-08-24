@@ -26,12 +26,11 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.brooklyn.test.HttpTestUtils;
+import org.apache.brooklyn.util.stream.Streams;
 import org.eclipse.jetty.server.Server;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import brooklyn.test.HttpTestUtils;
-import brooklyn.util.stream.Streams;
 
 public class CatalogRestApiLauncherTest extends CatalogRestApiLauncherTestFixture {
 
