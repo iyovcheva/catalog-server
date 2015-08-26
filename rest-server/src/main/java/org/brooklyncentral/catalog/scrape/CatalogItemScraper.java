@@ -1,91 +1,92 @@
 package org.brooklyncentral.catalog.scrape;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.brooklyn.util.stream.Streams;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.brooklyncentral.catalog.model.CatalogItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
 
 public class CatalogItemScraper {
 
-    public static Map<String, CatalogItem> scrapeBlueprints(String repoUrl) {
-        List<String> catalogItemRepoUrls = parseDirectoryYaml(repoUrl);
-        parseCatalogItem(catalogItemRepoUrls.iterator().next());
+    private static final Logger LOG = LoggerFactory.getLogger(CatalogItemScraper.class);
 
-        return null;
+    public static Map<String, CatalogItem> scrapeCatalogItems(String repoUrl) {
+        List<String> catalogItemRepoUrls = parseDirectoryYaml(repoUrl);
+        Map<String, CatalogItem> scrapedCatalogItems = Maps.newHashMapWithExpectedSize(catalogItemRepoUrls
+                .size());
+
+        for (String catalogItemRepoUrl : catalogItemRepoUrls) {
+            Optional<CatalogItem> catalogItem = parseCatalogItem(catalogItemRepoUrl);
+
+            if (catalogItem.isPresent()) {
+                scrapedCatalogItems.put(catalogItem.get().getToken(), catalogItem.get());
+            }
+        }
+
+        return scrapedCatalogItems;
     }
 
     @SuppressWarnings("unchecked")
     private static List<String> parseDirectoryYaml(String repoUrl) {
-        Optional<String> directoryYamlString = getGithubRawText(repoUrl, "directory.yaml");
-
-        if (!directoryYamlString.isPresent()) {
-            throw new IllegalStateException("Failed to read catalog directory.");
+        Optional<String> directoryYamlString;
+        try {
+            directoryYamlString = CatalogItemScraperHelper.getGithubRawText(repoUrl, "directory.yaml", true);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to load blueprint catalog.", e);
         }
 
         return (List<String>) Yamls.parseAll(directoryYamlString.get()).iterator().next();
     }
 
-    private static Optional<String> getGithubRawText(String repoUrl, String fileName) {
-        String rawGithubUrl = generateRawGithubUrl(repoUrl, fileName);
+    private static Optional<CatalogItem> parseCatalogItem(String repoUrl) {
+        try {
+            String[] urlTokens = repoUrl.split("/");
 
-        try (InputStream inputStream = new URL(rawGithubUrl).openStream()) {
-            return Optional.of(Streams.readFullyString(inputStream));
+            String repoName = urlTokens[urlTokens.length - 1];
+            String author = urlTokens[urlTokens.length - 2];
+
+            Optional<String> description = CatalogItemScraperHelper.getGithubRawText(repoUrl, "README.md",
+                    true);
+            Optional<String> documentation = CatalogItemScraperHelper.getGithubRawText(repoUrl, "items.js",
+                    true);
+
+            Optional<String> catalogBomString = CatalogItemScraperHelper.getGithubRawText(repoUrl,
+                    "catalog.bom", true);
+            @SuppressWarnings("unchecked")
+            Map<String, Object> catalogBomYaml = (Map<String, Object>) Yamls.parseAll(catalogBomString.get())
+                    .iterator().next();
+
+            Optional<String> masterCommitHash = Optional.absent();
+
+            Optional<String> license = Optional.absent();
+            String licenseUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "LICENSE");
+
+            if (urlExists(licenseUrl)) {
+                license = CatalogItemScraperHelper.getGithubRawText(repoUrl, "LICENSE", false);
+            }
+
+            Optional<String> changelog = Optional.absent();
+            String changelogUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "CHANGELOG");
+
+            if (urlExists(changelogUrl)) {
+                changelog = CatalogItemScraperHelper.getGithubRawText(repoUrl, "CHANGELOG", false);
+            }
+
+            CatalogItem catalogItem = new CatalogItem(repoUrl, repoName, author, description.get(),
+                    documentation.get(), catalogBomString.get(), catalogBomYaml, masterCommitHash.orNull(),
+                    license.orNull(), changelog.orNull());
+
+            return Optional.of(catalogItem);
         } catch (Exception e) {
-            // TODO Log or something: String error =
-            // "Unable to read raw Github URL " + rawGithubUrl + ": " + e,
-            // e);
+            LOG.warn("Failed to parse catalog item repository: '" + repoUrl + "'.", e);
             return Optional.absent();
         }
-    }
-
-    private static String generateRawGithubUrl(String repoUrl, String fileName) {
-        return repoUrl.replace("github.com", "raw.githubusercontent.com") + "/master/" + fileName;
-    }
-
-    private static CatalogItem parseCatalogItem(String repoUrl) {
-        //TODO Properly handle required vs. optional failures
-
-        String[] urlTokens = repoUrl.split("/");
-
-        String repoName = urlTokens[urlTokens.length - 1];
-        String author = urlTokens[urlTokens.length - 2];
-
-        Optional<String> description = getGithubRawText(repoUrl, "README.md");
-        Optional<String> documentation = getGithubRawText(repoUrl, "items.js");
-
-        Optional<String> catalogBomString = getGithubRawText(repoUrl, "catalog.bom");
-        @SuppressWarnings("unchecked")
-        Map<String, Object> catalogBomYaml = (Map<String, Object>) Yamls.parseAll(catalogBomString.get())
-                .iterator().next();
-
-        Optional<String> masterCommitHash = Optional.absent();
-
-        Optional<String> license;
-        String licenseUrl = generateRawGithubUrl(repoUrl, "LICENSE.txt");
-
-        if (urlExists(licenseUrl)) {
-            license = Optional.of(getGithubRawText(repoUrl, "LICENSE.txt").get());
-        } else {
-            license = Optional.absent();
-        }
-
-        Optional<String> changelog;
-        String changelogUrl = generateRawGithubUrl(repoUrl, "CHANGELOG.md");
-
-        if (urlExists(changelogUrl)) {
-            changelog = Optional.of(getGithubRawText(repoUrl, "CHANGELOG.md").get());
-        } else {
-            changelog = Optional.absent();
-        }
-
-        //TODO Actually create CatalogItem
-        return null;
     }
 
     private static boolean urlExists(String url) {
@@ -98,6 +99,6 @@ public class CatalogItemScraper {
     }
 
     public static void main(String[] args) {
-        scrapeBlueprints("https://github.com/brooklyncentral/brooklyn-community-catalog");
+        scrapeCatalogItems("https://github.com/brooklyncentral/brooklyn-community-catalog");
     }
 }
