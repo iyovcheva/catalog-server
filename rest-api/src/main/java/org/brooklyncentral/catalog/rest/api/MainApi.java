@@ -19,7 +19,6 @@
 package org.brooklyncentral.catalog.rest.api;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -30,29 +29,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.brooklyncentral.catalog.dto.CatalogItem;
+
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface MainApi {
 
     @GET
-    @Path("/repos")
-    public List<Map<String,String>> listRepositories(
+    @Path("/items")
+    public List<CatalogItem> listCatalogItems(
             @QueryParam("regex") @DefaultValue("") String regex,
             @QueryParam("fragment") @DefaultValue("") String fragment);
 
-    /** Returns detailed info for a repository */
     @GET
-    @Path("/repo/{ownerName}/{repoName}")
-    public Map<String,Object> getRepo(
-        @PathParam("ownerName") final String ownerName,
-        @PathParam("repoName") final String repoName);
-
-    /** Returns the primary catalog */
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/repo/{ownerName}/{repoName}/catalog")
-    public String getRepoCatalog(
+    @Path("/items/{ownerName}/{repoName}")
+    public CatalogItem getCatalogItem(
         @PathParam("ownerName") final String ownerName,
         @PathParam("repoName") final String repoName);
 
