@@ -79,8 +79,8 @@ public class CatalogItemScraper {
             }
 
             CatalogItem catalogItem = new CatalogItem(repoUrl, repoName, author, description.get(),
-                    documentation.get(), catalogBomString.get(), catalogBomYaml, masterCommitHash, license,
-                    changelog);
+                    documentation.get(), catalogBomString.get(), catalogBomYaml, masterCommitHash.orNull(),
+                    license.orNull(), changelog.orNull());
 
             return Optional.of(catalogItem);
         } catch (Exception e) {

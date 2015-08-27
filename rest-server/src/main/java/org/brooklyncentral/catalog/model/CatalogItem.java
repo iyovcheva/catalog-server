@@ -2,9 +2,9 @@ package org.brooklyncentral.catalog.model;
 
 import java.util.Map;
 
-import org.apache.brooklyn.util.yaml.Yamls;
+import javax.annotation.Nullable;
 
-import com.google.common.base.Optional;
+import org.apache.brooklyn.util.yaml.Yamls;
 
 public class CatalogItem {
 
@@ -19,14 +19,14 @@ public class CatalogItem {
     private final String catalogBomString;
     private final Map<String, Object> catalogBomYaml;
 
-    private final Optional<String> masterCommitHash;
-    private final Optional<String> license;
-    private final Optional<String> changelog;
+    private final String masterCommitHash;
+    private final String license;
+    private final String changelog;
 
     @SuppressWarnings("unchecked")
     public CatalogItem(String repoUrl, String repoName, String author, String description,
             String documentation, String catalogBomString, Map<String, Object> catalogBomYaml,
-            Optional<String> masterCommitHash, Optional<String> license, Optional<String> changelog) {
+            @Nullable String masterCommitHash, @Nullable String license, @Nullable String changelog) {
 
         this.repoUrl = repoUrl;
         this.repoName = repoName;
@@ -76,15 +76,15 @@ public class CatalogItem {
         return catalogBomYaml;
     }
 
-    public Optional<String> getMasterCommitHash() {
+    public String getMasterCommitHash() {
         return masterCommitHash;
     }
 
-    public Optional<String> getLicense() {
+    public String getLicense() {
         return license;
     }
 
-    public Optional<String> getChangelog() {
+    public String getChangelog() {
         return changelog;
     }
 }
