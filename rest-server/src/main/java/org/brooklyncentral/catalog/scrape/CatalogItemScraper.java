@@ -65,17 +65,17 @@ public class CatalogItemScraper {
             Optional<String> masterCommitHash = Optional.absent();
 
             Optional<String> license = Optional.absent();
-            String licenseUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "LICENSE");
+            String licenseUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "LICENSE.txt");
 
             if (urlExists(licenseUrl)) {
-                license = CatalogItemScraperHelper.getGithubRawText(repoUrl, "LICENSE", false);
+                license = CatalogItemScraperHelper.getGithubRawText(repoUrl, "LICENSE.txt", false);
             }
 
             Optional<String> changelog = Optional.absent();
-            String changelogUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "CHANGELOG");
+            String changelogUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "CHANGELOG.md");
 
             if (urlExists(changelogUrl)) {
-                changelog = CatalogItemScraperHelper.getGithubRawText(repoUrl, "CHANGELOG", false);
+                changelog = CatalogItemScraperHelper.getGithubRawText(repoUrl, "CHANGELOG.md", false);
             }
 
             CatalogItem catalogItem = new CatalogItem(repoUrl, repoName, author, description.get(),
