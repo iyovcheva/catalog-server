@@ -2,8 +2,6 @@ package org.brooklyncentral.catalog.model;
 
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import org.apache.brooklyn.util.yaml.Yamls;
 
 import com.google.common.base.Optional;
@@ -28,7 +26,7 @@ public class CatalogItem {
     @SuppressWarnings("unchecked")
     public CatalogItem(String repoUrl, String repoName, String author, String description,
             String documentation, String catalogBomString, Map<String, Object> catalogBomYaml,
-            @Nullable String masterCommitHash, @Nullable String license, @Nullable String changelog) {
+            Optional<String> masterCommitHash, Optional<String> license, Optional<String> changelog) {
 
         this.repoUrl = repoUrl;
         this.repoName = repoName;
@@ -41,9 +39,9 @@ public class CatalogItem {
         this.catalogBomString = catalogBomString;
         this.catalogBomYaml = (Map<String, Object>) Yamls.parseAll(catalogBomString).iterator().next();
 
-        this.masterCommitHash = Optional.of(masterCommitHash);
-        this.license = Optional.of(license);
-        this.changelog = Optional.of(changelog);
+        this.masterCommitHash = masterCommitHash;
+        this.license = license;
+        this.changelog = changelog;
     }
 
     public String getRepoUrl() {
