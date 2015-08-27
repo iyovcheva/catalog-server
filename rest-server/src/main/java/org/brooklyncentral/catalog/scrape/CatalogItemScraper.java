@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.util.yaml.Yamls;
-import org.brooklyncentral.catalog.model.CatalogItem;
+import org.brooklyncentral.catalog.dto.CatalogItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

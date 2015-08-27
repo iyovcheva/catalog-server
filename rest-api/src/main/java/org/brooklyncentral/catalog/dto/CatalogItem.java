@@ -1,4 +1,4 @@
-package org.brooklyncentral.catalog.model;
+package org.brooklyncentral.catalog.dto;
 
 import java.util.Map;
 
