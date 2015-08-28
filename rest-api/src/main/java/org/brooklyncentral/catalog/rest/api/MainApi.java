@@ -30,6 +30,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.brooklyncentral.catalog.dto.CatalogItem;
+import org.brooklyncentral.catalog.dto.Repository;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -37,8 +38,8 @@ import org.brooklyncentral.catalog.dto.CatalogItem;
 public interface MainApi {
 
     @GET
-    @Path("/items")
-    public List<CatalogItem> listCatalogItems(
+    @Path("/repositories")
+    public List<Repository> listRepositories(
             @QueryParam("regex") @DefaultValue("") String regex,
             @QueryParam("fragment") @DefaultValue("") String fragment);
 

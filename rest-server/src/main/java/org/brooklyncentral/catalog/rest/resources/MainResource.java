@@ -8,8 +8,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.brooklyncentral.catalog.dto.CatalogItem;
+import org.brooklyncentral.catalog.dto.Repository;
 import org.brooklyncentral.catalog.rest.api.MainApi;
 import org.brooklyncentral.catalog.rest.server.CatalogServerState;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 public class MainResource implements MainApi {
 
@@ -17,8 +21,15 @@ public class MainResource implements MainApi {
 
     // TODO Support filtering by regex and fragment (currently parameters are ignored)
     @Override
-    public List<CatalogItem> listCatalogItems(String regex, String fragment) {
-        return CatalogServerState.getInstance(servletContext).getCatalogItems();
+    public List<Repository> listRepositories(String regex, String fragment) {
+        List<CatalogItem> catalogItems = CatalogServerState.getInstance(servletContext).getCatalogItems();
+
+        return Lists.transform(catalogItems, new Function<CatalogItem, Repository>() {
+            @Override
+            public Repository apply(CatalogItem input) {
+                return input.getRepository();
+            }
+        });
     }
 
     @Override

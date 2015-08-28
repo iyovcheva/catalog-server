@@ -8,10 +8,7 @@ import org.apache.brooklyn.util.yaml.Yamls;
 
 public class CatalogItem {
 
-    private final String repoUrl;
-    private final String repoName;
-    private final String author;
-    private final String token;
+    private final Repository repository;
 
     private final String description;
     private final String documentation;
@@ -28,10 +25,7 @@ public class CatalogItem {
             String documentation, String catalogBomString, Map<String, Object> catalogBomYaml,
             @Nullable String masterCommitHash, @Nullable String license, @Nullable String changelog) {
 
-        this.repoUrl = repoUrl;
-        this.repoName = repoName;
-        this.author = author;
-        this.token = author + "/" + repoName;
+        this.repository = new Repository(repoUrl, repoName, author);
 
         this.description = description;
         this.documentation = documentation;
@@ -44,20 +38,12 @@ public class CatalogItem {
         this.changelog = changelog;
     }
 
-    public String getRepoUrl() {
-        return repoUrl;
-    }
-
-    public String getRepoName() {
-        return repoName;
-    }
-
-    public String getAuthor() {
-        return author;
+    public Repository getRepository() {
+        return repository;
     }
 
     public String getToken() {
-        return token;
+        return getRepository().getToken();
     }
 
     public String getDescription() {
