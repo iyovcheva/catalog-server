@@ -45,6 +45,7 @@ define([
                 });
             }
 
+            $('h2').html(this.renderTitle(list.length));
             $('ul.list-repositories').empty();
             _.each(list, function(item) {
                 var tpl = _.template('<li><a href="#blueprint/<%= repository.get("token") %>"><%= repository.get("repoName") %></a></li>');
@@ -56,10 +57,17 @@ define([
             if (!this.repositories.loaded) {
                 this.$el.html('LOADING...');
             } else {
-                this.$el.html(_.template(BlueprintsHtml)({ repositories: this.repositories.models }))
+                this.$el.html(_.template(BlueprintsHtml)({
+                    view: this,
+                    repositories: this.repositories.models
+                }))
             }
             
             return this;
+        },
+
+        renderTitle: function(number) {
+            return number + ' blueprint' + (number == 1 ? '' : 's') + ' available';
         }
     });
 
