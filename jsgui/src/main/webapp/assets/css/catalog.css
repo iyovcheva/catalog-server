@@ -14,7 +14,7 @@
    ----------------------------------------------------------------------- */
 body {
   margin: 0px;
-  padding: 60px 0px 20px 0px;
+  padding: 60px 0px 100px 0px;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 17px;
@@ -664,10 +664,6 @@ a.header-literal-anchor {
 
 ul.list-repositories a span {
   color: #777;
-}
-
-.tab-content {
-  margin: 10px 0 100px 0;
 }
 
 .card dl {
