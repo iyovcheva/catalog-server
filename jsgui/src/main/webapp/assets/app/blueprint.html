@@ -4,10 +4,10 @@
 
 <ul class="nav nav-tabs" id="blueprint-tabs" role="tablist">
     <li role="presentation" class="active"><a role="tab" data-target="#overview">Overview</a></li>
+    <li role="presentation"><a role="tab" data-target="#catalog">Catalog</a></li>
     <% if (blueprint.get("documentation")) { %>
     <li role="presentation"><a href="documentation" role="tab" data-target="#documentation">Documentation</a></li>
     <% } %>
-    <li role="presentation"><a role="tab" data-target="#catalog">Catalog</a></li>
     <% if (blueprint.get("changelog")) { %>
     <li role="presentation"><a role="tab" data-target="#changelog">Changelog</a></li>
     <% } %>
@@ -19,6 +19,10 @@
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="overview">
         <%= marked(blueprint.get("description")) %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="catalog">
+        <pre><%= blueprint.get("catalogBomString").replace(new RegExp('\r?\n', 'g'), '<br />') %></pre>
     </div>
 
     <% if (blueprint.get("documentation")) { %>
@@ -43,12 +47,6 @@
     </div>
     <% } %>
 
-    <div role="tabpanel" class="tab-pane" id="catalog">
-        <pre>
-        <%= blueprint.get("catalogBomString").replace(new RegExp('\r?\n', 'g'), '<br />') %>
-        </pre>
-    </div>
-
     <% if (blueprint.get("changelog")) { %>
     <div role="tabpanel" class="tab-pane" id="changelog">
         <%= marked(blueprint.get("changelog")) %>
@@ -57,9 +55,7 @@
 
     <% if (blueprint.get("license")) { %>
     <div role="tabpanel" class="tab-pane" id="license">
-        <pre>
-        <%= blueprint.get("license").replace(new RegExp('\r?\n', 'g'), '<br />') %>
-        </pre>
+        <pre><%= blueprint.get("license").replace(new RegExp('\r?\n', 'g'), '<br />') %></pre>
     </div>
     <% } %>
 </div>
