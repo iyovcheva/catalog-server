@@ -1,13 +1,14 @@
 define([
     'jquery', 'underscore', 'backbone',
-    'text!app/blueprints.html',
-], function ($, _, Backbone, BlueprintsHtml) {
+    'text!app/blueprints.html', 'text!app/repository.html'
+], function ($, _, Backbone, BlueprintsHtml, RepositoryHtml) {
 
     var BlueprintsView = Backbone.View.extend({
         tagName: 'div',
 
         initialize: function() {
             var that = this;
+
             this.catalog = this.options.catalog;
             this.repositories = this.catalog.repositories;
             
@@ -20,10 +21,6 @@ define([
             });
         },
 
-        events: {
-            'keyup input.blueprint-search': 'onSearch'
-        },
-        
         onEvent: function(event, coll, response) {
             if (event == 'error') {
                 this.$el.html('ERROR contacting server for blueprints');
@@ -36,7 +33,11 @@ define([
             }
         },
 
-        onSearch: function() {
+        events: {
+            'keyup input.blueprint-search': 'onSearch'
+        },
+
+        onSearch: function(e) {
             var list = this.repositories.models;
 
             if ($('input.blueprint-search').val() != '') {
@@ -48,26 +49,29 @@ define([
             $('h2').html(this.renderTitle(list.length));
             $('ul.list-repositories').empty();
             _.each(list, function(item) {
-                var tpl = _.template('<li><a href="#blueprint/<%= repository.get("token") %>"><%= repository.get("repoName") %></a></li>');
+                var tpl = _.template(RepositoryHtml);
                 $('ul.list-repositories').append(tpl({repository: item}));
             });
         },
+
+        renderTitle: function(number) {
+            return number + ' blueprint' + (number == 1 ? '' : 's') + ' available';
+        },
+
+        renderRepository: _.template(RepositoryHtml),
         
         render: function() {
             if (!this.repositories.loaded) {
                 this.$el.html('LOADING...');
             } else {
                 this.$el.html(_.template(BlueprintsHtml)({
-                    view: this,
-                    repositories: this.repositories.models
-                }))
+                    repositories: this.repositories.models,
+                    renderTitle: this.renderTitle,
+                    renderRepository: this.renderRepository
+                }));
             }
             
             return this;
-        },
-
-        renderTitle: function(number) {
-            return number + ' blueprint' + (number == 1 ? '' : 's') + ' available';
         }
     });
 

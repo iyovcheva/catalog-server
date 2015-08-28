@@ -6,7 +6,7 @@
     <li role="presentation" class="active"><a role="tab" data-target="#overview">Overview</a></li>
     <li role="presentation"><a role="tab" data-target="#catalog">Catalog</a></li>
     <% if (blueprint.get("documentation")) { %>
-    <li role="presentation"><a href="documentation" role="tab" data-target="#documentation">Documentation</a></li>
+    <li role="presentation"><a role="tab" data-target="#documentation">Documentation</a></li>
     <% } %>
     <% if (blueprint.get("changelog")) { %>
     <li role="presentation"><a role="tab" data-target="#changelog">Changelog</a></li>
@@ -22,7 +22,7 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="catalog">
-        <pre><%= blueprint.get("catalogBomString").replace(new RegExp('\r?\n', 'g'), '<br />') %></pre>
+        <pre><%= blueprint.get("catalogBomString").nl2br() %></pre>
     </div>
 
     <% if (blueprint.get("documentation")) { %>
@@ -30,19 +30,19 @@
         <% eval(blueprint.get("documentation")) %>
         <h4>Config keys</h4>
         <% _.each(items.entities[0].config, function(configKey) { %>
-            <%= view.renderCard(configKey, 'configKey') %>
+            <%= renderCard({item: configKey, cssClass: 'configKey'}) %>
         <% }) %>
 
         <hr />
         <h4>Sensors</h4>
         <% _.each(items.entities[0].sensors, function(sensor) { %>
-            <%= view.renderCard(sensor, 'sensor') %>
+            <%= renderCard({item: sensor, cssClass: 'sensor'}) %>
         <% }) %>
 
         <hr />
         <h4>Effectors</h4>
         <% _.each(items.entities[0].effectors, function(effector) { %>
-            <%= view.renderCard(effector, 'effector') %>
+            <%= renderCard({item: effector, cssClass: 'effector'}) %>
         <% }) %>
     </div>
     <% } %>
@@ -55,19 +55,7 @@
 
     <% if (blueprint.get("license")) { %>
     <div role="tabpanel" class="tab-pane" id="license">
-        <pre><%= blueprint.get("license").replace(new RegExp('\r?\n', 'g'), '<br />') %></pre>
+        <pre><%= blueprint.get("license").nl2br() %></pre>
     </div>
     <% } %>
 </div>
-
-<script>
-    $("#blueprint-tabs a").click(function(e) {
-        e.preventDefault();
-        var id = $(this).attr("href");
-        $(this).tab('show')
-        return false;
-    });
-    $("#overview img").each(function() {
-        $(this).attr("src", "https://raw.githubusercontent.com/<%= blueprint.get('token') %>/master/" + $(this).attr("src"));
-    });
-</script>

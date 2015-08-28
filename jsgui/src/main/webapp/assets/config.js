@@ -55,6 +55,11 @@ require.config({
 require([
     "backbone", "router"
 ], function (Backbone, Router) {
+    // Replace new line by <br/> HTML tag. We add that to the String prototype as it might be extensively used.
+    String.prototype.nl2br = function () {
+        return this.replace(new RegExp("\r?\n", "g"), "<br />");
+    };
+
     var router = new Router();
     Backbone.history.start();
 });

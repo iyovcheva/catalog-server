@@ -662,6 +662,10 @@ a.header-literal-anchor {
   display: inline !important;
 }
 
+ul.list-repositories a span {
+  color: #777;
+}
+
 .tab-content {
   margin: 10px 0 100px 0;
 }
