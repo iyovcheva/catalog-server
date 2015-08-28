@@ -53,14 +53,15 @@ public class CatalogItemScraper {
 
             Optional<String> description = CatalogItemScraperHelper.getGithubRawText(repoUrl, "README.md",
                     true);
-            Optional<String> documentation = CatalogItemScraperHelper.getGithubRawText(repoUrl, "items.js",
-                    true);
 
             Optional<String> catalogBomString = CatalogItemScraperHelper.getGithubRawText(repoUrl,
                     "catalog.bom", true);
             @SuppressWarnings("unchecked")
             Map<String, Object> catalogBomYaml = (Map<String, Object>) Yamls.parseAll(catalogBomString.get())
                     .iterator().next();
+
+            Optional<String> documentation = CatalogItemScraperHelper.getGithubRawText(repoUrl, "items.js",
+                    false);
 
             Optional<String> masterCommitHash = Optional.absent();
 
@@ -79,7 +80,7 @@ public class CatalogItemScraper {
             }
 
             CatalogItem catalogItem = new CatalogItem(repoUrl, repoName, author, description.get(),
-                    documentation.get(), catalogBomString.get(), catalogBomYaml, masterCommitHash.orNull(),
+                    catalogBomString.get(), catalogBomYaml, documentation.orNull(), masterCommitHash.orNull(),
                     license.orNull(), changelog.orNull());
 
             return Optional.of(catalogItem);
