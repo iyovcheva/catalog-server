@@ -264,7 +264,7 @@ public class CatalogRestApiLauncher {
 
     public static void main(String[] args) throws Exception {
         // TODO accept "--live" to use the GitHub endpoint; right now local is hard-coded
-        startRestResourcesViaFilter(newTestContentServerConfig());
+        startRestResourcesViaFilter(CatalogServerConfig.newDefault());
         log.info("Press Ctrl-C to quit.");
     }
 

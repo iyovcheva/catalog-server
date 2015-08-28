@@ -661,3 +661,26 @@ h6:hover .header-link {
 a.header-literal-anchor {
   display: inline !important;
 }
+
+.tab-content {
+  margin: 10px 0 100px 0;
+}
+
+.card dl {
+  font-size: 0.9em;
+}
+
+.card h5 {
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+.card dt {
+  width: 140px;
+  float: left;
+  text-align: right;
+}
+
+.card dd {
+  margin-left: 150px;
+}

@@ -31,6 +31,7 @@ require.config({
         "text":"deps/text",
         "backbone":"deps/backbone",
         "bootstrap":"deps/bootstrap",
+        "marked": "deps/marked"
     },
     
     shim:{
@@ -41,7 +42,10 @@ require.config({
             deps:[ "underscore", "jquery" ],
             exports:"Backbone"
         },
-        "bootstrap": { deps: [ "jquery" ] /* http://stackoverflow.com/questions/9227406/bootstrap-typeerror-undefined-is-not-a-function-has-no-method-tab-when-us */ }
+        "bootstrap": { deps: [ "jquery" ] /* http://stackoverflow.com/questions/9227406/bootstrap-typeerror-undefined-is-not-a-function-has-no-method-tab-when-us */ },
+        "marked": {
+            exports: "marked"
+        }
     }
 });
 

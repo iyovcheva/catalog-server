@@ -1,0 +1,10 @@
+<h2><%= repositories.length %> blueprints available</h2>
+
+<input type="text" class="form-control blueprint-search" placeholder="Search" aria-describedby="search" />
+<hr />
+
+<ul class="list-repositories">
+<% _.each(repositories, function(repository) { %>
+    <li><a href="#blueprint/<%= repository.get('token') %>"><%= repository.get("repoName") %></a></li>
+<% }); %>
+</ul>

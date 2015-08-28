@@ -1,0 +1,77 @@
+<h2>Blueprint: <%= trail %></h2>
+
+<h4>Created by <%= blueprint.get('repository').author %> <a href="<%= blueprint.get('repository').repoUrl %>"><i class="fa fa-github"></i></a></h4>
+
+<ul class="nav nav-tabs" id="blueprint-tabs" role="tablist">
+    <li role="presentation" class="active"><a role="tab" data-target="#overview">Overview</a></li>
+    <% if (blueprint.get("documentation")) { %>
+    <li role="presentation"><a href="documentation" role="tab" data-target="#documentation">Documentation</a></li>
+    <% } %>
+    <li role="presentation"><a role="tab" data-target="#catalog">Catalog</a></li>
+    <% if (blueprint.get("changelog")) { %>
+    <li role="presentation"><a role="tab" data-target="#changelog">Changelog</a></li>
+    <% } %>
+    <% if (blueprint.get("license")) { %>
+    <li role="presentation"><a role="tab" data-target="#license">License</a></li>
+    <% } %>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="overview">
+        <%= marked(blueprint.get("description")) %>
+    </div>
+
+    <% if (blueprint.get("documentation")) { %>
+    <div role="tabpanel" class="tab-pane" id="documentation">
+        <% eval(blueprint.get("documentation")) %>
+        <h4>Config keys</h4>
+        <% _.each(items.entities[0].config, function(configKey) { %>
+            <%= view.renderCard(configKey, 'configKey') %>
+        <% }) %>
+
+        <hr />
+        <h4>Sensors</h4>
+        <% _.each(items.entities[0].sensors, function(sensor) { %>
+            <%= view.renderCard(sensor, 'sensor') %>
+        <% }) %>
+
+        <hr />
+        <h4>Effectors</h4>
+        <% _.each(items.entities[0].effectors, function(effector) { %>
+            <%= view.renderCard(effector, 'effector') %>
+        <% }) %>
+    </div>
+    <% } %>
+
+    <div role="tabpanel" class="tab-pane" id="catalog">
+        <pre>
+        <%= blueprint.get("catalogBomString").replace(new RegExp('\r?\n', 'g'), '<br />') %>
+        </pre>
+    </div>
+
+    <% if (blueprint.get("changelog")) { %>
+    <div role="tabpanel" class="tab-pane" id="changelog">
+        <%= marked(blueprint.get("changelog")) %>
+    </div>
+    <% } %>
+
+    <% if (blueprint.get("license")) { %>
+    <div role="tabpanel" class="tab-pane" id="license">
+        <pre>
+        <%= blueprint.get("license").replace(new RegExp('\r?\n', 'g'), '<br />') %>
+        </pre>
+    </div>
+    <% } %>
+</div>
+
+<script>
+    $("#blueprint-tabs a").click(function(e) {
+        e.preventDefault();
+        var id = $(this).attr("href");
+        $(this).tab('show')
+        return false;
+    });
+    $("#overview img").each(function() {
+        $(this).attr("src", "https://raw.githubusercontent.com/<%= blueprint.get('token') %>/master/" + $(this).attr("src"));
+    });
+</script>
