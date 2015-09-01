@@ -291,7 +291,7 @@
               <file>${project.build.webapp}/index.html</file>
               <replacements>
                 <replacement>
-                  <token>assets/js/config.js</token>
+                  <token>assets/config.js</token>
                   <value>assets/js/gui.all.min.js</value>
                 </replacement>
                 <replacement>
