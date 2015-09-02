@@ -1,4 +1,4 @@
-# Brooklyn-Central Catalog
+# Brooklyn-Central Catalog Server
 
 This project allows setting up a catalog of repositories for user-created Brooklyn blueprints
 which can be served up in an easy-to-navigate way.
@@ -23,9 +23,8 @@ There you will find documentation on the required blueprint repository structure
 
 ## Implementation Notes
 
-* Server side data is read once at startup and never refreshed during a browsing session
-
-	* Potential improvements: Periodic updates or hooks when changes are commited to the individual GitHub repos
+* Server side data is refreshed once every 30 minutes to ensure that all the repo information is (relatively) fresh
+	* Potential improvement: Github hook integration, so changes that are committed to the individual repos will appear on the server immediately
 
 
 ## TODO
@@ -37,7 +36,6 @@ There you will find documentation on the required blueprint repository structure
 	* Github API integration
 		* More information about each repo would be accessible
 		* Hooks 	
-
 
 * Longer term:
 	* Modify the brooklyn catalog file format to allow multiple entries and smoother integration
