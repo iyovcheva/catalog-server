@@ -6,6 +6,16 @@
   padding-left: 0;
   font-size: 2em;
 }
+.beta {
+  font-size: 1.2em;
+  display: inline-block;
+  margin-top: 10px;
+}
+@media (min-width: 768px) {
+  .beta {
+    margin-right: -20px;
+  }
+}
 
 @mixin icon($name) {
   .icon-#{$name} {
