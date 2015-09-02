@@ -1,19 +1,16 @@
 package org.brooklyncentral.catalog.rest.resources;
 
-import java.util.List;
+import org.brooklyncentral.catalog.ServerServletContextInitializer;
+import org.brooklyncentral.catalog.dto.CatalogItem;
+import org.brooklyncentral.catalog.dto.Repository;
+import org.brooklyncentral.catalog.rest.api.MainApi;
+import org.brooklyncentral.catalog.rest.server.Catalog;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-
-import org.brooklyncentral.catalog.dto.CatalogItem;
-import org.brooklyncentral.catalog.dto.Repository;
-import org.brooklyncentral.catalog.rest.api.MainApi;
-import org.brooklyncentral.catalog.rest.server.CatalogServerState;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public class MainResource implements MainApi {
 
@@ -22,24 +19,22 @@ public class MainResource implements MainApi {
     // TODO Support filtering by regex and fragment (currently parameters are ignored)
     @Override
     public List<Repository> listRepositories(String regex, String fragment) {
-        List<CatalogItem> catalogItems = CatalogServerState.getInstance(servletContext).getCatalogItems();
+        Catalog catalog = (Catalog) servletContext.getAttribute(ServerServletContextInitializer.CATALOG);
+        if (catalog == null) {
+            throw new WebApplicationException(Response.status(404).build());
+        }
 
-        return Lists.transform(catalogItems, new Function<CatalogItem, Repository>() {
-            @Override
-            public Repository apply(CatalogItem input) {
-                return input.getRepository();
-            }
-        });
+        return catalog.getRepositories();
     }
 
     @Override
     public CatalogItem getCatalogItem(String ownerName, String repoName) {
-        CatalogItem catalogItem = CatalogServerState.getInstance(servletContext).getCatalogItem(ownerName, repoName);
-        if (catalogItem == null) {
+        Catalog catalog = (Catalog) servletContext.getAttribute(ServerServletContextInitializer.CATALOG);
+        if (catalog == null) {
             throw new WebApplicationException(Response.status(404).build());
         }
 
-        return catalogItem;
+        return catalog.getCatalogItem(ownerName, repoName);
     }
 
 }
