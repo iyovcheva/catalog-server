@@ -34,7 +34,7 @@ public class ServerServletContextInitializer implements ServletContextListener {
         context.setAttribute(CATALOG_CONFIG, config);
         context.setAttribute(CATALOG, new Catalog(catalogItems));
 
-        timer.schedule(new ScraperTask(context), PERIOD);
+        timer.schedule(new ScraperTask(context), PERIOD, PERIOD);
     }
 
     @Override
