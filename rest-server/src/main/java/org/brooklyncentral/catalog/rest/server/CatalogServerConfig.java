@@ -28,10 +28,4 @@ public class CatalogServerConfig {
         context.setAttribute(CatalogServerConfig.class.getName(), serverConfig);
     }
 
-    public static CatalogServerConfig retrieve(ServletContext context) {
-        CatalogServerConfig result = (CatalogServerConfig) context.getAttribute(CatalogServerConfig.class.getName());
-        if (result==null) result = newDefault();
-        return result;
-    }
-
 }

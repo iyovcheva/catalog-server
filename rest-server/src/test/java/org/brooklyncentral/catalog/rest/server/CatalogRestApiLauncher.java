@@ -39,6 +39,7 @@ import org.apache.brooklyn.util.exceptions.Exceptions;
 import org.apache.brooklyn.util.net.Networking;
 import org.apache.brooklyn.util.net.Urls;
 import org.apache.brooklyn.util.text.WildcardGlobs;
+import org.brooklyncentral.catalog.ServerServletContextInitializer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -142,6 +143,7 @@ public class CatalogRestApiLauncher {
             default:
                 context = filterContextHandler();
                 summary = "programmatic Jersey ServletContainer filter on webapp at " + ((WebAppContext) context).getWar();
+                context.addEventListener(new ServerServletContextInitializer());
                 break;
             }
         } else {
@@ -156,6 +158,7 @@ public class CatalogRestApiLauncher {
 
     private ContextHandler filterContextHandler() {
         WebAppContext context = new WebAppContext();
+        context.setThrowUnavailableOnStartupException(true);
         initializeForCatalog(context);
         context.setContextPath("/");
         // here we run with the JS GUI, for convenience, if we can find it, else set up an empty dir
@@ -167,8 +170,8 @@ public class CatalogRestApiLauncher {
         // If the working directory is not set correctly, Brooklyn will be unable to find the jsgui .war
         // file and the 'gui not available' message will be shown.
         context.setWar(this.deployJsgui && findJsguiWebapp() != null
-                       ? findJsguiWebapp()
-                       : createTempWebDirWithIndexHtml("Brooklyn Central Catalog REST API <p> (gui not available)"));
+                ? findJsguiWebapp()
+                : createTempWebDirWithIndexHtml("Brooklyn Central Catalog REST API <p> (gui not available)"));
         installAsServletFilter(context, this.filters);
         return context;
     }
