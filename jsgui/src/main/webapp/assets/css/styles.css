@@ -18,4 +18,5 @@
 */
 @import url('../deps/bootstrap.css');
 @import url('../deps/bootstrap-theme.css');
+@import url('../deps/font-awesome-4.2.0/css/font-awesome.css');
 @import url('catalog.css');

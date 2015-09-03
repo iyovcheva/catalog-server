@@ -1,8 +1,0 @@
-
-<%= repos.length %> repos:
-
-<ul>
-<% for (ri in repos) { var r=repos[ri].attributes; %>
-  <li><a href="<%= "#repo/"+r.owner+"/"+r.name %>"><%= r.owner +"/"+ r.name %></a></li>
-<% } %>
-</ul>

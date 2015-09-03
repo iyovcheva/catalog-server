@@ -3,8 +3,18 @@
 
 /* top menu bar */
 .navbar-brand {
-    margin-top: -4px;
-    margin-left: -30px !important;
+  padding-left: 0;
+  font-size: 2em;
+}
+.beta {
+  font-size: 1.2em;
+  display: inline-block;
+  margin-top: 10px;
+}
+@media (min-width: 768px) {
+  .beta {
+    margin-right: -20px;
+  }
 }
 
 @mixin icon($name) {
@@ -190,6 +200,7 @@
   }
   a.sub-item { 
     border-radius: 0 !important;
+    border-bottom: 0;
     border-bottom: 0;
     margin-left: 12px;
     padding-left: 10px; 

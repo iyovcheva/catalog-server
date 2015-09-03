@@ -14,7 +14,7 @@
    ----------------------------------------------------------------------- */
 body {
   margin: 0px;
-  padding: 60px 0px 20px 0px;
+  padding: 60px 0px 100px 0px;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 17px;
@@ -252,10 +252,19 @@ a code {
    ----------------------------------------------------------------------- */
 /* top menu bar */
 .navbar-brand {
-  margin-top: -4px;
-  margin-left: -30px !important;
+  padding-left: 0;
+  font-size: 2em;
 }
-
+.beta {
+  font-size: 1.2em;
+  display: inline-block;
+  margin-top: 10px;
+}
+@media (min-width: 768px) {
+  .beta {
+    margin-right: -20px;
+  }
+}
 .navbar .icon-github {
   width: 32px;
   height: 32px;
@@ -557,7 +566,10 @@ div#footer {
   text-align: center;
   font-size: 80%;
 }
-
+div#footer p {
+    font-size: 0.9em;
+    margin: 0;
+}
 .octicon-footer {
   color: #888888;
   font-size: 130%;
@@ -660,4 +672,27 @@ h6:hover .header-link {
 
 a.header-literal-anchor {
   display: inline !important;
+}
+
+ul.list-repositories a span {
+  color: #777;
+}
+
+.card dl {
+  font-size: 0.9em;
+}
+
+.card h5 {
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+.card dt {
+  width: 140px;
+  float: left;
+  text-align: right;
+}
+
+.card dd {
+  margin-left: 150px;
 }

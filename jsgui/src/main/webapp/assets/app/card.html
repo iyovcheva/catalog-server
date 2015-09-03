@@ -1,0 +1,49 @@
+<div class="well well-sm card <%= cssClass %>">
+    <h5 class="name"><%= item.name %></h5>
+    <dl>
+        <% if (_.has(item, 'label') && !_.isEmpty(item.label)) { %>
+        <dt>label</dt>
+        <dd><%= item.label %></dd>
+        <% } %>
+        <% if (_.has(item, 'description') && !_.isEmpty(item.description)) { %>
+        <dt>description</dt>
+        <dd><%= item.description %></dd>
+        <% } %>
+        <% if (_.has(item, 'type') && !_.isEmpty(item.type)) { %>
+        <dt>type</dt>
+        <dd><%= item.type %></dd>
+        <% } %>
+        <% if (_.has(item, 'returnType') && !_.isEmpty(item.returnType)) { %>
+        <dt>return type</dt>
+        <dd><%= item.returnType %></dd>
+        <% } %>
+        <% if (_.has(item, 'defaultValue') && !_.isEmpty(item.defaultValue)) { %>
+        <dt>default value</dt>
+        <dd><%= item.defaultValue %></dd>
+        <% } %>
+        <% if (_.has(item, 'possibleValues') && !_.isEmpty(item.possibleValues)) { %>
+        <dt>possible values</dt>
+        <dd><%= item.possibleValues %></dd>
+        <% } %>
+        <% if (_.has(item, 'reconfigurable')) { %>
+        <dt>is reconfigurable?</dt>
+        <dd><%= item.reconfigurable %></dd>
+        <% } %>
+        <% if (_.has(item, 'priority') && !_.isEmpty(item.priority)) { %>
+        <dt>priority</dt>
+        <dd><%= item.priority %></dd>
+        <% } %>
+        <% if (_.has(item, 'links') && !_.isEmpty(item.links)) { %>
+        <dt>links</dt>
+        <dd><a href="<%= item.links %>"><%= item.links %></a></dd>
+        <% } %>
+        <% if (_.has(item, 'parameters') && item.parameters.length > 0) { %>
+        <dt>parameters</dt>
+        <dd><ul>
+            <% _.each(item.parameters, function(parameter) { %>
+            <li><%= parameter %></li>
+            <% }) %>
+        </ul></dd>
+        <% } %>
+    </dl>
+</div>

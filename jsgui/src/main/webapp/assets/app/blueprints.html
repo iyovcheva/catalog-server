@@ -1,0 +1,10 @@
+<h2><%= renderTitle(repositories.length) %></h2>
+
+<input type="text" class="form-control blueprint-search" placeholder="Search" aria-describedby="search" />
+<hr />
+
+<ul class="list-repositories">
+<% _.each(repositories, function(repository) { %>
+    <%= renderRepository({repository: repository}) %>
+<% }); %>
+</ul>

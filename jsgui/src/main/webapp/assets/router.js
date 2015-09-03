@@ -19,18 +19,18 @@
 define([
     "underscore", "jquery", "backbone",
     "app/model/catalog",
-    "app/home", "app/repos", "app/repo", 
+    "app/home", "app/blueprints", "app/blueprint",
     "text!app/examples.html", "text!app/tools.html",
 ], function (_, $, Backbone, Catalog,
-        HomeView, ReposView, RepoView, ExamplesHtml, ToolsHtml) {
+        HomeView, BlueprintsView, BlueprintView, ExamplesHtml, ToolsHtml) {
 
     var catalog = new Catalog();
     
     var Router = Backbone.Router.extend({
         routes:{
             'home':'homePage',
-            'repos':'reposPage',
-            'repo/*trail':'repoPage',
+            'blueprints': 'blueprintsPage',
+            'blueprint/*trail': 'blueprintPage',
             'examples':'examplesPage',
             'tools':'toolsPage',
             
@@ -66,11 +66,11 @@ define([
         homePage:function () {
             this.showPage(new HomeView({}))
         },
-        reposPage:function () {
-            this.showPage(new ReposView({catalog: catalog}), ".nav1_repos");
+        blueprintsPage:function () {
+            this.showPage(new BlueprintsView({catalog: catalog}), ".nav1_blueprints");
         },
-        repoPage: function(trail) {
-            this.showPage(new RepoView({trail: trail, catalog: catalog}), ".nav1_repos");
+        blueprintPage: function(trail) {
+            this.showPage(new BlueprintView({trail: trail, catalog: catalog}), ".nav1_blueprints");
         },
         examplesPage:function () {
             this.showPage(_.template(ExamplesHtml, {}), ".nav1_examples");
@@ -78,19 +78,7 @@ define([
         toolsPage:function () {
             this.showPage(_.template(ToolsHtml, {}), ".nav1_tools");
         },
-    })
-
-/*
-    $.ajax({
-        type: "GET",
-        url: "/v1/server/user",
-        dataType: "text"
-    }).done(function (data) {
-        if (data != null) {
-            $("#user").html(data);
-        }
     });
-*/
 
-    return Router
-})
+    return Router;
+});
