@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
 
-public class CatalogItemScraperHelper {
+public class CatalogScraperHelper {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CatalogItemScraperHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CatalogScraperHelper.class);
 
     public static Optional<String> getGithubRawText(String repoUrl, String fileName, boolean required) {
         String rawGithubUrl = generateRawGithubUrl(repoUrl, fileName);

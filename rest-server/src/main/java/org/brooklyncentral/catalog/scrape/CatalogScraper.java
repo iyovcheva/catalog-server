@@ -6,17 +6,18 @@ import java.util.Map;
 
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.brooklyncentral.catalog.dto.CatalogItem;
+import org.brooklyncentral.catalog.rest.server.Catalog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 
-public class CatalogItemScraper {
+public class CatalogScraper {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CatalogItemScraper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CatalogScraper.class);
 
-    public static Map<String, CatalogItem> scrapeCatalogItems(String repoUrl) {
+    public static Catalog scrapeCatalog(String repoUrl) {
         List<String> catalogItemRepoUrls = parseDirectoryYaml(repoUrl);
         Map<String, CatalogItem> scrapedCatalogItems = Maps.newHashMapWithExpectedSize(catalogItemRepoUrls
                 .size());
@@ -29,14 +30,14 @@ public class CatalogItemScraper {
             }
         }
 
-        return scrapedCatalogItems;
+        return new Catalog(scrapedCatalogItems);
     }
 
     @SuppressWarnings("unchecked")
     private static List<String> parseDirectoryYaml(String repoUrl) {
         Optional<String> directoryYamlString;
         try {
-            directoryYamlString = CatalogItemScraperHelper.getGithubRawText(repoUrl, "directory.yaml", true);
+            directoryYamlString = CatalogScraperHelper.getGithubRawText(repoUrl, "directory.yaml", true);
         } catch (Exception e) {
             throw new IllegalStateException("Failed to load blueprint catalog.", e);
         }
@@ -51,32 +52,32 @@ public class CatalogItemScraper {
             String repoName = urlTokens[urlTokens.length - 1];
             String author = urlTokens[urlTokens.length - 2];
 
-            Optional<String> description = CatalogItemScraperHelper.getGithubRawText(repoUrl, "README.md",
+            Optional<String> description = CatalogScraperHelper.getGithubRawText(repoUrl, "README.md",
                     true);
 
-            Optional<String> catalogBomString = CatalogItemScraperHelper.getGithubRawText(repoUrl,
+            Optional<String> catalogBomString = CatalogScraperHelper.getGithubRawText(repoUrl,
                     "catalog.bom", true);
             @SuppressWarnings("unchecked")
             Map<String, Object> catalogBomYaml = (Map<String, Object>) Yamls.parseAll(catalogBomString.get())
                     .iterator().next();
 
-            Optional<String> documentation = CatalogItemScraperHelper.getGithubRawText(repoUrl, "items.js",
+            Optional<String> documentation = CatalogScraperHelper.getGithubRawText(repoUrl, "items.js",
                     false);
 
             Optional<String> masterCommitHash = Optional.absent();
 
             Optional<String> license = Optional.absent();
-            String licenseUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "LICENSE.txt");
+            String licenseUrl = CatalogScraperHelper.generateRawGithubUrl(repoUrl, "LICENSE.txt");
 
             if (urlExists(licenseUrl)) {
-                license = CatalogItemScraperHelper.getGithubRawText(repoUrl, "LICENSE.txt", false);
+                license = CatalogScraperHelper.getGithubRawText(repoUrl, "LICENSE.txt", false);
             }
 
             Optional<String> changelog = Optional.absent();
-            String changelogUrl = CatalogItemScraperHelper.generateRawGithubUrl(repoUrl, "CHANGELOG.md");
+            String changelogUrl = CatalogScraperHelper.generateRawGithubUrl(repoUrl, "CHANGELOG.md");
 
             if (urlExists(changelogUrl)) {
-                changelog = CatalogItemScraperHelper.getGithubRawText(repoUrl, "CHANGELOG.md", false);
+                changelog = CatalogScraperHelper.getGithubRawText(repoUrl, "CHANGELOG.md", false);
             }
 
             CatalogItem catalogItem = new CatalogItem(repoUrl, repoName, author, description.get(),
@@ -97,9 +98,5 @@ public class CatalogItemScraper {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        scrapeCatalogItems("https://github.com/brooklyncentral/brooklyn-community-catalog");
     }
 }

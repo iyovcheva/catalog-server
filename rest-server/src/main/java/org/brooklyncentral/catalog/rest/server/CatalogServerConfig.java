@@ -1,7 +1,5 @@
 package org.brooklyncentral.catalog.rest.server;
 
-import javax.servlet.ServletContext;
-
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
 public class CatalogServerConfig {
