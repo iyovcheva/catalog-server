@@ -6,7 +6,7 @@ define([
 
     Blueprint.Model = Backbone.Model.extend({
         url: function() {
-            return '/items/' + this.id;
+            return 'api/items/' + this.id;
         },
         defaults: function() {
             return {

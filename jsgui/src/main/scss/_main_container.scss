@@ -38,8 +38,8 @@ h6 {
 /* install subset of font-awesome */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('#{$style_dir}/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot');
-  src: url('#{$style_dir}/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('#{$style_dir}/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('#{$style_dir}/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('#{$style_dir}/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  src: url('../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot');
+  src: url('../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
