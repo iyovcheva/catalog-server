@@ -20,7 +20,6 @@
 
     <properties>
         <app.context>rest</app.context>
-        <jetty.version>9.2.9.v20150224</jetty.version>
         <slf4j.version>1.6.3</slf4j.version>
         <servlet.version>3.0.1</servlet.version>
         <testng.version>6.1.1</testng.version>
@@ -114,7 +113,6 @@
                         </goals>
                         <configuration>
                             <scanIntervalSeconds>0</scanIntervalSeconds>
-                            <daemon>true</daemon>
                         </configuration>
                     </execution>
                     <execution>
