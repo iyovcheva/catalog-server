@@ -1,82 +1,37 @@
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-    
-     http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<web-app>
-    <display-name>Brooklyn Catalog REST API</display-name>
-
-    <!-- Brooklyn REST is usu run as a filter so static content can be placed in a webapp
-         to which this is added; to run as a servlet directly, replace the filter tags 
-         below (after the comment) with the servlet tags (commented out immediately below),
-         (and do the same for the matching tags at the bottom)
-        <servlet>
-            <servlet-name>Brooklyn REST API v1 Servlet</servlet-name>
-            <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-     -->
-
-    <filter>
-        <filter-name>Brooklyn Catalog REST API v1 Filter</filter-name>
-        <filter-class>com.sun.jersey.spi.container.servlet.ServletContainer</filter-class>
-
-        <!-- load our REST API jersey resources explicitly 
-            (the package scanner will only pick up classes with @Path annotations - doesn't look at implemented interfaces) 
-        -->
-        <init-param>
-            <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
-            <param-value>com.sun.jersey.api.core.ClassNamesResourceConfig</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.classnames</param-name>
-            <param-value>
-                org.brooklyncentral.catalog.rest.resources.MainResource;
-                org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-            </param-value>
-        </init-param>
-
-        <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
-
-        <!-- no need for WADL. of course you can turn it back on it you want. -->
-        <init-param>
-            <param-name>com.sun.jersey.config.feature.DisableWADL</param-name>
-            <param-value>true</param-value>
-        </init-param>
-
-    </filter>
-    <filter-mapping>
-        <filter-name>Brooklyn Catalog REST API v1 Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- Brooklyn REST as a filter above; replace above 5 lines with those commented out below,
-         to run it as a servlet (see note above) 
-            <load-on-startup>1</load-on-startup>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>Brooklyn REST API v1 Servlet</servlet-name>
-            <url-pattern>/*</url-pattern>
-        </servlet-mapping>
-    -->
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+    <display-name>Brooklyn Central Catalog REST Server</display-name>
 
     <listener>
         <listener-class>org.brooklyncentral.catalog.ServerServletContextInitializer</listener-class>
     </listener>
+
+    <!-- Auto scan REST service -->
+    <context-param>
+        <param-name>resteasy.resources</param-name>
+        <param-value>
+            org.brooklyncentral.catalog.rest.resources.MainResource
+        </param-value>
+    </context-param>
+
+    <!-- this should be the same URL pattern as the servlet-mapping property -->
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -1,12 +1,8 @@
 package org.brooklyncentral.catalog.rest.server;
 
-import javax.servlet.ServletContext;
-
-import org.eclipse.jetty.servlet.ServletContextHandler;
-
 public class CatalogServerConfig {
 
-    public static String DEFAULT_REPOSITORIES_URL = "https://github.com/brooklyncentral/brooklyn-community-catalog";
+    public static final String DEFAULT_REPOSITORIES_URL = "https://github.com/brooklyncentral/brooklyn-community-catalog";
 
     private String repositoriesUrl;
 
@@ -23,9 +19,4 @@ public class CatalogServerConfig {
     public String getRepositoriesUrl() {
         return repositoriesUrl;
     }
-
-    public static void apply(ServletContextHandler context, CatalogServerConfig serverConfig) {
-        context.setAttribute(CatalogServerConfig.class.getName(), serverConfig);
-    }
-
 }

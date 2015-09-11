@@ -1,16 +1,15 @@
 package org.brooklyncentral.catalog.scrape;
 
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.brooklyncentral.catalog.dto.CatalogItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.Maps;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
 
 public class CatalogItemScraper {
 
