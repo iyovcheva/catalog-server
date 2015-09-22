@@ -17,7 +17,7 @@ define([
 
     Repository.Collection = Backbone.Collection.extend({
         model: Repository.Model,
-        url: '/repositories'
+        url: 'api/repositories'
     });
 
     return Repository;

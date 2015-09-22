@@ -1,8 +1,0 @@
-services:
-- type: brooklyn.entity.basic.BasicEntity
-  brooklyn.config:
-    foo: bar
-
-brooklyn.catalog:
-  id: foo1
-  version: 1.0

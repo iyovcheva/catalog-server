@@ -1,23 +1,24 @@
 package org.brooklyncentral.catalog.scrape;
 
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.brooklyncentral.catalog.dto.CatalogItem;
 import org.brooklyncentral.catalog.rest.server.Catalog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.Maps;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
 
 public class CatalogScraper {
 
     private static final Logger LOG = LoggerFactory.getLogger(CatalogScraper.class);
 
     public static Catalog scrapeCatalog(String repoUrl) {
+        LOG.info("Start scraping...");
+
         List<String> catalogItemRepoUrls = parseDirectoryYaml(repoUrl);
         Map<String, CatalogItem> scrapedCatalogItems = Maps.newHashMapWithExpectedSize(catalogItemRepoUrls
                 .size());
@@ -29,6 +30,8 @@ public class CatalogScraper {
                 scrapedCatalogItems.put(catalogItem.get().getToken(), catalogItem.get());
             }
         }
+
+        LOG.info("Scraping complete");
 
         return new Catalog(scrapedCatalogItems);
     }

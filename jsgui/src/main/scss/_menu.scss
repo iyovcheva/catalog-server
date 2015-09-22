@@ -21,11 +21,11 @@
   .icon-#{$name} {
     width: 32px;
     height: 32px;
-    background: url('#{$style_dir}/../img/'+$name+'-256-black.png');
+    background: url('../img/'+$name+'-256-black.png');
     background-size: 32px 32px;
   }
   .icon-#{$name}:hover {
-    background: url('#{$style_dir}/../img/'+$name+'-256-green.png');
+    background: url('../img/'+$name+'-256-green.png');
     background-size: 32px 32px;
   }
 }

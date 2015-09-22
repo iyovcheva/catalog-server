@@ -4,7 +4,7 @@
 // mvn sass:update-stylesheets
 // cp target/jsgui-0.7.0-SNAPSHOT/assets/css/catalog.css src/main/webapp/assets/css/
   
-$style_dir: "/assets/css";
+$style_dir: "assets";
 
 @import 'init';
 @import 'util';

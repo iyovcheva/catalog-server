@@ -1,13 +1,12 @@
 package org.brooklyncentral.catalog.scrape;
 
-import java.io.InputStream;
-import java.net.URL;
-
+import com.google.common.base.Optional;
 import org.apache.brooklyn.util.stream.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Optional;
+import java.io.InputStream;
+import java.net.URL;
 
 public class CatalogScraperHelper {
 

@@ -1,6 +1,6 @@
 ({
-    cssIn: "${project.build.webapp}/assets/css/styles.css",
-    out: "${project.build.webapp}/assets/css/styles.min.css",
+    cssIn: "${project.build.directory}/classes/META-INF/resources/assets/css/styles.css",
+    out: "${project.build.directory}/classes/META-INF/resources/assets/css/styles.min.css",
 
     // CSS optimization options are:
     //  - "standard": @import inlining, comment removal and line returns.

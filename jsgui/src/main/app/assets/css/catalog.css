@@ -268,31 +268,31 @@ a code {
 .navbar .icon-github {
   width: 32px;
   height: 32px;
-  background: url("/assets/css/../img/github-256-black.png");
+  background: url("../img/github-256-black.png");
   background-size: 32px 32px;
 }
 .navbar .icon-github:hover {
-  background: url("/assets/css/../img/github-256-green.png");
+  background: url("../img/github-256-green.png");
   background-size: 32px 32px;
 }
 .navbar .icon-twitter {
   width: 32px;
   height: 32px;
-  background: url("/assets/css/../img/twitter-256-black.png");
+  background: url("../img/twitter-256-black.png");
   background-size: 32px 32px;
 }
 .navbar .icon-twitter:hover {
-  background: url("/assets/css/../img/twitter-256-green.png");
+  background: url("../img/twitter-256-green.png");
   background-size: 32px 32px;
 }
 .navbar .icon-irc {
   width: 32px;
   height: 32px;
-  background: url("/assets/css/../img/irc-256-black.png");
+  background: url("../img/irc-256-black.png");
   background-size: 32px 32px;
 }
 .navbar .icon-irc:hover {
-  background: url("/assets/css/../img/irc-256-green.png");
+  background: url("../img/irc-256-green.png");
   background-size: 32px 32px;
 }
 
@@ -622,8 +622,8 @@ h6 {
 /* install subset of font-awesome */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("/assets/css/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot");
-  src: url("/assets/css/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0") format("embedded-opentype"), url("/assets/css/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0") format("woff"), url("/assets/css/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0") format("truetype"), url("/assets/css/deps/font-awesome-4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular") format("svg");
+  src: url("../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot");
+  src: url("../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0") format("embedded-opentype"), url("../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0") format("woff"), url("../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0") format("truetype"), url("../deps/font-awesome-4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
