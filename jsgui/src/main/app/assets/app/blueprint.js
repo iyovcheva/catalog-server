@@ -60,6 +60,9 @@ define([
                 $('#overview img').each(function() {
                     $(this).attr('src', 'https://raw.githubusercontent.com/' + that.blueprint.get('token') + '/master/' + $(this).attr("src"));
                 });
+                $('#overview a:not([href^=http])').each(function() {
+                    $(this).attr('href', 'https://github.com/' + that.blueprint.get('token') + '/blob/master/' + $(this).attr("href"))
+                });
             }
 
             return this;
