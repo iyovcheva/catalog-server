@@ -45,12 +45,10 @@ public class ServerServletContextInitializer extends ResteasyBootstrap {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        LOG.info("Starting scraper...");
         ServletContext context = servletContextEvent.getServletContext();
         CatalogServerConfig config = CatalogServerConfig.newDefault();
         Catalog catalog = CatalogScraper.scrapeCatalog(config.getRepositoriesUrl());
 
-        LOG.info("Scraping complete");
         context.setAttribute(CATALOG_CONFIG, config);
         context.setAttribute(CATALOG, catalog);
 

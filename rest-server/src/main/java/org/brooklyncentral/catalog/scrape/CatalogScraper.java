@@ -17,6 +17,8 @@ public class CatalogScraper {
     private static final Logger LOG = LoggerFactory.getLogger(CatalogScraper.class);
 
     public static Catalog scrapeCatalog(String repoUrl) {
+        LOG.info("Start scraping...");
+
         List<String> catalogItemRepoUrls = parseDirectoryYaml(repoUrl);
         Map<String, CatalogItem> scrapedCatalogItems = Maps.newHashMapWithExpectedSize(catalogItemRepoUrls
                 .size());
@@ -28,6 +30,8 @@ public class CatalogScraper {
                 scrapedCatalogItems.put(catalogItem.get().getToken(), catalogItem.get());
             }
         }
+
+        LOG.info("Scraping complete");
 
         return new Catalog(scrapedCatalogItems);
     }

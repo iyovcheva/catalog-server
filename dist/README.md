@@ -11,6 +11,7 @@ You need to build and install the entire project's modules
     
 ## How to run
 
+    cd /path/to/catalog-server
     mvn jetty:run
     
 Then, open up a browser to
