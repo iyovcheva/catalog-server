@@ -6,12 +6,11 @@ This module will gather and build the final WAR file that can be deployed onto a
 
 You need to build and install the entire project's modules
 
-    cd /path/to/catalog-server
     mvn clean install
     
 ## How to run
 
-    cd /path/to/catalog-server
+    cd /path/to/dist
     mvn jetty:run
     
 Then, open up a browser to
