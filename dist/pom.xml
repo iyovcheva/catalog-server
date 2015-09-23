@@ -105,6 +105,34 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.4.16</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat7x</containerId>
+                        <type>remote</type>
+                    </container>
+                    <configuration>
+                        <type>runtime</type>
+                        <properties>
+                            <cargo.server.settings>community-catalog</cargo.server.settings>
+                        </properties>
+                    </configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>catalog</context>
+                            </properties>
+                            <pingURL>http://catalog.brooklyn.io</pingURL>
+                        </deployable>
+                    </deployables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
