@@ -45,7 +45,7 @@
     <inceptionYear>2015</inceptionYear>
 
     <properties>
-        <brooklyn.version>0.8.0-SNAPSHOT</brooklyn.version>
+        <brooklyn.version>0.9.0-SNAPSHOT</brooklyn.version>
         <resteasy.version>3.0.12.Final</resteasy.version>
         <jetty.version>9.2.9.v20150224</jetty.version>
     </properties>

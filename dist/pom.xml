@@ -128,7 +128,7 @@
                             <properties>
                                 <context>catalog</context>
                             </properties>
-                            <pingURL>http://catalog.brooklyn.io</pingURL>
+                            <pingURL>http://catalog.cloudsoft.io</pingURL>
                         </deployable>
                     </deployables>
                 </configuration>
