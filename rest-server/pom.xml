@@ -116,10 +116,10 @@
                     <webApp>
                         <contextPath>/${app.context}</contextPath>
                     </webApp>
-                    <stopPort>8079</stopPort>
+                    <stopPort>8889</stopPort>
                     <stopKey>stopit</stopKey>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>8888</port>
                         <idleTimeout>60000</idleTimeout>
                     </httpConnector>
                 </configuration>
