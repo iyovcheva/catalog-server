@@ -17,7 +17,7 @@ You need to build and install the entire project's modules
     
 Then, open up a browser to
 
-    http://localhost:8080/rest/repositories
+    http://localhost:8080/rest/api/repositories
     
 The list of all available repositories should appear there.
 
