@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<!-- Brooklyn SHA-1: GIT_SHA_1 -->
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brooklyn Central: catalog of entities, examples, and tools for Apache Brooklyn">
+
+    <title>Brooklyn Central</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body ng-app="catalog">
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="header" role="navigation">
+      <div class="container-and-sidebars">
+      
+        <div class="container-sidebar-left">
+            <span class="label label-success beta">beta</span>
+        </div>
+        
+        <div class="container container-between-sidebars top-menu">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Brooklyn Central</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#blueprints" class="nav1 nav1_blueprint">Blueprints</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </div><!-- /.container -->
+        
+        <div class="container-sidebar-right">
+          <div class="navbar-sidebar-right-icons">
+            <a href="https://github.com/brooklyncentral/catalog-server" class="navbar-icon navbar-icon-shift icon-github"
+              data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GitHub: apache/incubator-brooklyn"></a>
+            <a href="https://twitter.com/#!/search?q=brooklyncentral" class="navbar-icon navbar-icon-shift icon-twitter"
+              data-toggle="tooltip" data-placement="bottom" title="Twitter: @brooklyncentral"/>
+            <a href="http://webchat.freenode.net/?channels=brooklyncentral" class="navbar-icon icon-irc"
+              data-toggle="tooltip" data-placement="bottom" title="IRC: freenode #brooklyncentral"/>
+            <!-- extra a element seems needed as landing page seems to copy the last element here (!?) 
+            -->
+            <a href="/" style="width: 0px; height: 0px;"></a>
+          </div>
+       </div>
+      
+     </div>
+   </nav>
+
+
+  <div class="container" id="main-content">
+    <ng-view></ng-view>
+  </div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row text-muted">
+            <p>
+                Brooklyn Central is a service mark of <a href="http://www.cloudsoftcorp.com">Cloudsoft Corporation</a>.
+                <a href="http://apache.org/">Apache</a> and <a href="http://brooklyn.io/">Apache Brooklyn</a> are trademarks of the Apache Software Foundation.
+            </p>
+            <p>The Brooklyn Central Community Catalog is intended to complement Apache Brooklyn and should not be confused with Apache Brooklyn.</p>
+            <p>&copy; 2012 <a href="http://www.cloudsoftcorp.com">Cloudsoft Corporation</a></p>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="javascript/vendors/jquery.js"></script>
+<script type="text/javascript" src="javascript/vendors/angular.js"></script>
+<script type="text/javascript" src="javascript/vendors/angular-route.js"></script>
+<script type="text/javascript" src="javascript/vendors/angular-resource.js"></script>
+<script type="text/javascript" src="javascript/vendors/bootstrap.js"></script>
+<script type="text/javascript" src="javascript/vendors/marked.js"></script>
+<script type="text/javascript" src="javascript/app.js"></script>
+<script type="text/javascript" src="javascript/models.js"></script>
+<script type="text/javascript" src="javascript/directives.js"></script>
+
+</body>
+</html>

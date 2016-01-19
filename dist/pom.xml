@@ -51,7 +51,7 @@
         </dependency>
         <dependency>
             <groupId>org.brooklyncentral.catalog</groupId>
-            <artifactId>catalog-jsgui</artifactId>
+            <artifactId>catalog-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
