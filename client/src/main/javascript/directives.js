@@ -59,12 +59,6 @@
                 }, function(err) {
                     $scope.error = err;
                 });
-
-                angular.element('#blueprint-tabs a').click(function(e) {
-                    e.preventDefault();
-                    angular.element(e.target).tab('show')
-                    return false;
-                });
             }]
         };
     }
@@ -90,16 +84,16 @@
             link: function(scope, element, attrs) {
                 scope.$watch('data', function(newValue) {
                     if (newValue) {
-                        var html = angular.element(marked(newValue));
+                        element
+                            .empty()
+                            .append(marked(newValue));
 
-                        html.find('img').each(function() {
-                            $(this).attr('src', 'https://raw.githubusercontent.com/' + attrs.path + '/master/' + $(this).attr("src"));
+                        angular.forEach(element[0].querySelectorAll('img'), function(elm) {
+                            angular.element(elm).attr('src', 'https://raw.githubusercontent.com/' + attrs.path + '/master/' + angular.element(elm).attr('src'));
                         });
-                        html.find('a:not([href^=http])').each(function() {
-                            $(this).attr('href', 'https://github.com/' + attrs.path + '/blob/master/' + $(this).attr("href"))
+                        angular.forEach(element[0].querySelectorAll('a:not([href^=http])'), function(elm) {
+                            angular.element(elm).attr('href', 'https://github.com/' + attrs.path + '/blob/master/' + angular.element(elm).attr('href'))
                         });
-
-                        element.empty().append(html);
                     }
                 });
             }

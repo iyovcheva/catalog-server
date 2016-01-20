@@ -21,24 +21,16 @@
 
 <h4>Created by {{blueprint.repository.author}} <a href="{{blueprint.repository.repoUrl}}"><i class="fa fa-github"></i></a></h4>
 
-<ul class="nav nav-tabs" id="blueprint-tabs" role="tablist">
-    <li role="presentation" class="active"><a role="tab" data-target="#overview">Overview</a></li>
-    <li role="presentation"><a role="tab" data-target="#catalog">Catalog</a></li>
-    <li role="presentation" ng-show="documentation"><a role="tab" data-target="#documentation">Documentation</a></li>
-    <li role="presentation" ng-show="blueprint.changelog"><a role="tab" data-target="#changelog">Changelog</a></li>
-    <li role="presentation" ng-show="blueprint.license"><a role="tab" data-target="#license">License</a></li>
-</ul>
-
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="overview">
+<uib-tabset>
+    <uib-tab heading="Overview">
         <markdown data="{{blueprint.description}}" path="{{blueprint.token}}"></markdown>
-    </div>
+    </uib-tab>
 
-    <div role="tabpanel" class="tab-pane" id="catalog">
+    <uib-tab heading="Catalog">
         <pre>{{blueprint.catalogBomString}}</pre>
-    </div>
+    </uib-tab>
 
-    <div role="tabpanel" class="tab-pane" id="documentation" ng-if="documentation">
+    <uib-tab heading="Documentation" ng-if="documentation">
         <h4 ng-if="documentation.entities[0].config">Config keys</h4>
         <configuration-card  ng-if="documentation.entities[0].config" cssClass="configKey" item="config" ng-repeat="config in documentation.entities[0].config"></configuration-card>
 
@@ -49,13 +41,13 @@
         <hr ng-if="documentation.entities[0].effectors" />
         <h4 ng-if="documentation.entities[0].effectors">Effectors</h4>
         <configuration-card ng-if="documentation.entities[0].effectors" cssClass="effector" item="effector" ng-repeat="effector in documentation.entities[0].effectors"></configuration-card>
-    </div>
+    </uib-tab>
 
-    <div role="tabpanel" class="tab-pane" id="changelog" ng-if="blueprint.changelog">
+    <uib-tab heading="Changelog" ng-if="blueprint.changelog">
         <markdown data="{{blueprint.changelog}}" path="{{blueprint.token}}"></markdown>
-    </div>
+    </uib-tab>
 
-    <div role="tabpanel" class="tab-pane" id="license" ng-if="blueprint.license">
+    <uib-tab heading="License" ng-if="blueprint.license">
         <pre>{{blueprint.license}}</pre>
-    </div>
-</div>
+    </uib-tab>
+</uib-tabset>
