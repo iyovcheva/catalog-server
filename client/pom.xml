@@ -44,6 +44,13 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -60,30 +67,7 @@
                             <outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main</directory>
-                                    <excludes>
-                                        <exclude>web-fragment.xml</exclude>
-                                    </excludes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-web-fragment</id>
-                        <!-- here the phase you need -->
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/classes/META-INF</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main</directory>
-                                    <filtering>true</filtering>
-                                    <includes>
-                                        <include>web-fragment.xml</include>
-                                    </includes>
+                                    <directory>src/main/app</directory>
                                 </resource>
                             </resources>
                         </configuration>

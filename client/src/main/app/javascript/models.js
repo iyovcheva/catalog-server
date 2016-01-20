@@ -28,6 +28,7 @@
             query: {
                 method: 'GET',
                 isArray: true
+
             }
         });
     }
