@@ -30,7 +30,9 @@
 </ul>
 
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="overview" ng-bind-html="blueprint.description | markdown"></div>
+    <div role="tabpanel" class="tab-pane active" id="overview">
+        <markdown data="{{blueprint.description}}" path="{{blueprint.token}}"></markdown>
+    </div>
 
     <div role="tabpanel" class="tab-pane" id="catalog">
         <pre>{{blueprint.catalogBomString}}</pre>
@@ -38,7 +40,7 @@
 
     <div role="tabpanel" class="tab-pane" id="documentation" ng-if="documentation">
         <h4 ng-if="documentation.entities[0].config">Config keys</h4>
-        <configuration-card  ng-if="documentation.entities[0].config"cssClass="configKey" item="config" ng-repeat="config in documentation.entities[0].config"></configuration-card>
+        <configuration-card  ng-if="documentation.entities[0].config" cssClass="configKey" item="config" ng-repeat="config in documentation.entities[0].config"></configuration-card>
 
         <hr ng-if="documentation.entities[0].sensors" />
         <h4 ng-if="documentation.entities[0].sensors">Sensors</h4>
@@ -49,7 +51,9 @@
         <configuration-card ng-if="documentation.entities[0].effectors" cssClass="effector" item="effector" ng-repeat="effector in documentation.entities[0].effectors"></configuration-card>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="changelog" ng-if="blueprint.changelog" ng-bind-html="blueprint.changelog | markdown"></div>
+    <div role="tabpanel" class="tab-pane" id="changelog" ng-if="blueprint.changelog">
+        <markdown data="{{blueprint.changelog}}" path="{{blueprint.token}}"></markdown>
+    </div>
 
     <div role="tabpanel" class="tab-pane" id="license" ng-if="blueprint.license">
         <pre>{{blueprint.license}}</pre>

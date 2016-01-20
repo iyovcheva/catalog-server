@@ -21,7 +21,8 @@
     angular.module('directives', ['ngRoute', 'models'])
         .directive('repositories', listRepositories)
         .directive('blueprint', blueprint)
-        .directive('configurationCard', configurationCard);
+        .directive('configurationCard', configurationCard)
+        .directive('markdown', markdown);
 
     function listRepositories() {
         return {
@@ -59,18 +60,11 @@
                     $scope.error = err;
                 });
 
-                $('#blueprint-tabs a').click(function(e) {
+                angular.element('#blueprint-tabs a').click(function(e) {
                     e.preventDefault();
-                    $(e.target).tab('show')
+                    angular.element(e.target).tab('show')
                     return false;
                 });
-
-                //$('#overview img').each(function() {
-                //    $(this).attr('src', 'https://raw.githubusercontent.com/' + blueprint.token + '/master/' + $(this).attr("src"));
-                //});
-                //$('#overview a:not([href^=http])').each(function() {
-                //    $(this).attr('href', 'https://github.com/' + blueprint.token + '/blob/master/' + $(this).attr("href"))
-                //});
             }]
         };
     }
@@ -83,6 +77,32 @@
                 cssClass: '@'
             },
             templateUrl: 'partial/directive-configuration-card.html'
+        };
+    }
+
+    function markdown() {
+        return {
+            restrict: 'E',
+            scope: {
+                data: '@',
+                path: '@'
+            },
+            link: function(scope, element, attrs) {
+                scope.$watch('data', function(newValue) {
+                    if (newValue) {
+                        var html = angular.element(marked(newValue));
+
+                        html.find('img').each(function() {
+                            $(this).attr('src', 'https://raw.githubusercontent.com/' + attrs.path + '/master/' + $(this).attr("src"));
+                        });
+                        html.find('a:not([href^=http])').each(function() {
+                            $(this).attr('href', 'https://github.com/' + attrs.path + '/blob/master/' + $(this).attr("href"))
+                        });
+
+                        element.empty().append(html);
+                    }
+                });
+            }
         };
     }
 })();
