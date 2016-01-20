@@ -17,7 +17,10 @@
   ~ under the License.
   -->
 
-<h2>{{results.length}} blueprint{{results.length != 1 ? 's' : ''}} available</h2>
+<h2><ng-pluralize count="results.length"
+                  when="{'0': '0 blueprints available',
+                       'one': '1 blueprint available',
+                       'other': '{} blueprints available'}"></h2>
 
 <input type="text" class="form-control blueprint-search" placeholder="Search" aria-describedby="search" ng-model="search" />
 <hr />
