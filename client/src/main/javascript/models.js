@@ -35,4 +35,4 @@
     function Blueprint($resources) {
         return $resources('api/items/:author/:repo', null, {});
     }
-})();
+})(window.angular);

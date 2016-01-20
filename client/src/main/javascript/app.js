@@ -40,4 +40,4 @@
             return angular.isDefined(text) ? $sce.trustAsHtml(marked(text)) : '';
         }
     }
-})();
+})(window.angular);
