@@ -18,13 +18,8 @@
  */
 
 (function() {
-
-    angular.module('models', ['ngResource'])
-        .factory('mRepository', ['$resource', Repository])
-        .factory('mBlueprint', ['$resource', Blueprint]);
-
     function Repository($resources) {
-        return $resources('api/repositories', null, {
+        return $resources('@@rest-server-root@@api/repositories', null, {
             query: {
                 method: 'GET',
                 isArray: true
@@ -34,6 +29,10 @@
     }
 
     function Blueprint($resources) {
-        return $resources('api/items/:author/:repo', null, {});
+        return $resources('@@rest-server-root@@api/items/:author/:repo', null, {});
     }
+
+    angular.module('models', ['ngResource'])
+        .factory('mRepository', ['$resource', Repository])
+        .factory('mBlueprint', ['$resource', Blueprint]);
 })(window.angular);

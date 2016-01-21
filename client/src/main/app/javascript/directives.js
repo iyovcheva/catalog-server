@@ -18,12 +18,6 @@
  */
 
 (function() {
-    angular.module('directives', ['ngRoute', 'models'])
-        .directive('repositories', listRepositories)
-        .directive('blueprint', blueprint)
-        .directive('configurationCard', configurationCard)
-        .directive('markdown', markdown);
-
     function listRepositories() {
         return {
             restrict: 'E',
@@ -32,7 +26,7 @@
             controller: ['$scope', 'mRepository', function($scope, mRepository) {
                 mRepository.query().$promise.then(function(data) {
                     $scope.error = '';
-                    $scope.repositories = data
+                    $scope.repositories = data;
                 }, function(err) {
                     $scope.error = err;
                 });
@@ -51,6 +45,7 @@
                     $scope.blueprint = data;
 
                     if (angular.isDefined(data.documentation) && data.documentation != null) {
+                        /* jshint evil:true */
                         eval(data.documentation);
                         if (angular.isDefined(items)) {
                             $scope.documentation = items;
@@ -92,11 +87,17 @@
                             angular.element(elm).attr('src', 'https://raw.githubusercontent.com/' + attrs.path + '/master/' + angular.element(elm).attr('src'));
                         });
                         angular.forEach(element[0].querySelectorAll('a:not([href^=http])'), function(elm) {
-                            angular.element(elm).attr('href', 'https://github.com/' + attrs.path + '/blob/master/' + angular.element(elm).attr('href'))
+                            angular.element(elm).attr('href', 'https://github.com/' + attrs.path + '/blob/master/' + angular.element(elm).attr('href'));
                         });
                     }
                 });
             }
         };
     }
+
+    angular.module('directives', ['ngRoute', 'models'])
+        .directive('repositories', listRepositories)
+        .directive('blueprint', blueprint)
+        .directive('configurationCard', configurationCard)
+        .directive('markdown', markdown);
 })(window.angular);

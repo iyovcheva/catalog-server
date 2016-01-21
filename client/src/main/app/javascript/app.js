@@ -18,10 +18,6 @@
  */
 
 (function() {
-    angular.module('catalog', ['ngRoute', 'models', 'directives', 'ui.bootstrap'])
-        .config(['$routeProvider', router])
-        .filter('markdown', ['$sce', markdown])
-
     function router($routeProvider) {
         $routeProvider
             .when('/', {
@@ -38,6 +34,10 @@
     function markdown($sce) {
         return function(text) {
             return angular.isDefined(text) ? $sce.trustAsHtml(marked(text)) : '';
-        }
+        };
     }
+
+    angular.module('catalog', ['ngRoute', 'models', 'directives', 'ui.bootstrap'])
+        .config(['$routeProvider', router])
+        .filter('markdown', ['$sce', markdown]);
 })(window.angular);
