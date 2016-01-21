@@ -53,4 +53,22 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Allow Ajax connections from remote hosts -->
+    <filter>
+        <filter-name>response-headers</filter-name>
+        <filter-class>org.brooklyncentral.catalog.ResponseHeadersFilter</filter-class>
+        <init-param>
+            <param-name>headersKeys</param-name>
+            <param-value>Access-Control-Allow-Origin</param-value>
+        </init-param>
+        <init-param>
+            <param-name>headersValues</param-name>
+            <param-value>*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>response-headers</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
