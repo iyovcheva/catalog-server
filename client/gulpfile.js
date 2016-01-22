@@ -26,6 +26,8 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var less = require('gulp-less');
+var minifyCss = require('gulp-minify-css');
+var header = require('gulp-header');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
@@ -34,18 +36,42 @@ var minimist = require('minimist');
 
 // Source folder
 var srcRoot = 'src/main/app/';
+// Bower source folder
+var bowerRoot = 'bower_components/';
 // Target folder
 var targetRoot = 'target/app/';
 // REST server for dev
 var restServerRoot = 'http://localhost:8888/rest/';
+// Banner
+var banner = [
+    '/**',
+    ' * Licensed to the Apache Software Foundation (ASF) under one',
+    ' * or more contributor license agreements.  See the NOTICE file',
+    ' * distributed with this work for additional information',
+    ' * regarding copyright ownership.  The ASF licenses this file',
+    ' * to you under the Apache License, Version 2.0 (the',
+    ' * "License"); you may not use this file except in compliance',
+    ' * with the License.  You may obtain a copy of the License at',
+    ' *',
+    ' *     http://www.apache.org/licenses/LICENSE-2.0',
+    ' *',
+    ' * Unless required by applicable law or agreed to in writing,',
+    ' * software distributed under the License is distributed on an',
+    ' * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY',
+    ' * KIND, either express or implied.  See the License for the',
+    ' * specific language governing permissions and limitations',
+    ' * under the License.',
+    ' */',
+    ''
+].join('\n');
 
 // Modify this list to include or exclude JS you want
 var jsFileList = [
-    'bower_components/angular/angular.js',
-    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-    'bower_components/angular-resource/angular-resource.js',
-    'bower_components/angular-route/angular-route.js',
-    'bower_components/marked/marked.min.js',
+    bowerRoot + 'angular/angular.js',
+    bowerRoot + 'angular-bootstrap/ui-bootstrap-tpls.js',
+    bowerRoot + 'angular-resource/angular-resource.js',
+    bowerRoot + 'angular-route/angular-route.js',
+    bowerRoot + 'marked/marked.min.js',
     srcRoot + 'javascript/*.js'
 ];
 
@@ -68,6 +94,7 @@ gulp.task('js', ['lint'], function() {
         .pipe(concat('public.js'))
         .pipe(replace(/@@rest-server-root@@/g, gulpif(isProduction, '/', restServerRoot)))
         .pipe(gulpif(isProduction, uglify()))
+        .pipe(gulpif(isProduction, header(banner)))
         .pipe(gulpif(isProduction, rename({ extname: '.min.js' })))
         .pipe(gulp.dest(targetRoot + 'js'));
 });
@@ -75,19 +102,21 @@ gulp.task('js', ['lint'], function() {
 // Compile all require LESS files and copy it to the target folder
 gulp.task('less', ['font'], function() {
     return gulp.src(srcRoot + 'less/public.less')
-        .pipe(gulpif(isProduction, sourcemaps.init()))
+        .pipe(gulpif(!isProduction, sourcemaps.init()))
         .pipe(less())
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.3', 'android 4', 'opera 12']
         }))
-        .pipe(gulpif(isProduction, sourcemaps.write()))
+        .pipe(gulpif(isProduction, minifyCss({keepSpecialComments: 0})))
+        .pipe(gulpif(isProduction, header(banner)))
+        .pipe(gulpif(!isProduction, sourcemaps.write()))
         .pipe(gulpif(isProduction, rename({ extname: '.min.css' })))
         .pipe(gulp.dest(targetRoot + 'css'));
 });
 
 // Copy fonts to the target folder
 gulp.task('font', function() {
-    return gulp.src('bower_components/font-awesome/fonts/*')
+    return gulp.src(bowerRoot + 'font-awesome/fonts/*')
         .pipe(gulp.dest(targetRoot + 'font'));
 });
 
