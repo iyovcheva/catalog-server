@@ -33,6 +33,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
 var connect = require('gulp-connect');
 var minimist = require('minimist');
+var gutil = require('gulp-util');
 
 // Source folder
 var srcRoot = 'src/main/app/';
@@ -159,14 +160,14 @@ gulp.task('webserver', function() {
 
 // Build the app
 gulp.task('build', ['js', 'less', 'img', 'partial', 'index'], function() {
-    console.log('✔ Build done!');
+    gutil.log(gutil.colors.green.bold.underline(isProduction ? 'Production' : 'Development'), gutil.colors.green('build done!'));
 
     if (isWatching) {
-        console.log('=> Watching sources...');
+        gutil.log(gutil.colors.cyan('=> Watching sources...'));
         gulp.start('watch');
     }
     if (isServing) {
-        console.log('=> Launching webserver...');
+        gutil.log(gutil.colors.yellow('=> Launching webserver...'));
         gulp.start('webserver');
     }
 });
