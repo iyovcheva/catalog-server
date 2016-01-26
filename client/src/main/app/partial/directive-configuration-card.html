@@ -1,0 +1,57 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<div class="well well-sm card {{cssClass}}">
+    <h5 class="name">{{item.name}}</h5>
+    <dl>
+        <dt ng-if="item.label">label</dt>
+        <dd ng-if="item.label">{{item.label}}</dd>
+
+        <dt ng-if="item.description">description</dt>
+        <dd ng-if="item.description">{{item.description}}</dd>
+
+        <dt ng-if="item.type">type</dt>
+        <dd ng-if="item.type">{{item.type}}</dd>
+
+        <dt ng-if="item.returnType">return type</dt>
+        <dd ng-if="item.returnType">{{item.returnType}}</dd>
+
+        <dt ng-if="item.defaultValue">default value</dt>
+        <dd ng-if="item.defaultValue">{{item.defaultValue}}</dd>
+
+        <dt ng-if="item.possibleValues">possible values</dt>
+        <dd ng-if="item.possibleValues">{{item.possibleValues}}</dd>
+
+        <dt ng-if="item.reconfigurable != undefined">is reconfigurable?</dt>
+        <dd ng-if="item.reconfigurable != undefined">{{item.reconfigurable}}</dd>
+
+        <dt ng-if="item.priority">priority</dt>
+        <dd ng-if="item.priority"><%= item.priority}}</dd>
+
+        <dt ng-if="item.links">links</dt>
+        <dd ng-if="item.links"><a href="{{item.links}}">{{item.links}}</a></dd>
+
+        <dt ng-if="item.parameters && item.parameters.length > 0">parameters</dt>
+        <dd ng-if="item.parameters && item.parameters.length > 0">
+            <ul>
+                <li ng-repeat="parameter in item.parameters">{{parameter}}</li>
+            </ul>
+        </dd>
+    </dl>
+</div>

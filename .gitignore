@@ -26,4 +26,7 @@ brooklyn*.log.*
 
 *brooklyn-persisted-state/
 
+*node_modules/
+*bower_components/
+
 ignored
