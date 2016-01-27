@@ -22,14 +22,28 @@
         return {
             restrict: 'E',
             templateUrl: 'partial/directive-list-repositories.html',
-            scope: {},
-            controller: ['$scope', 'mRepository', function($scope, mRepository) {
-                mRepository.query().$promise.then(function(data) {
+            scope: {
+                showAuthor: '@',
+                showSearchThreshold: '@'
+            },
+            controller: ['$scope', '$routeParams', 'mRepository', function($scope, $routeParams, mRepository) {
+                mRepository.query({author: $routeParams.author}).$promise.then(function(data) {
                     $scope.error = '';
                     $scope.repositories = data;
                 }, function(err) {
                     $scope.error = err;
                 });
+            }]
+        };
+    }
+
+    function author() {
+        return {
+            restrict: 'E',
+            templateUrl: 'partial/directive-author.html',
+            scope: {},
+            controller: ['$scope', '$routeParams', function($scope, $routeParams) {
+                $scope.author = $routeParams.author;
             }]
         };
     }
@@ -97,6 +111,7 @@
 
     angular.module('directives', ['ngRoute', 'models'])
         .directive('repositories', listRepositories)
+        .directive('author', author)
         .directive('blueprint', blueprint)
         .directive('configurationCard', configurationCard)
         .directive('markdown', markdown);

@@ -19,14 +19,22 @@
 
 package org.brooklyncentral.catalog.rest.server;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 import org.brooklyncentral.catalog.dto.CatalogItem;
 import org.brooklyncentral.catalog.dto.Repository;
 
-import java.util.List;
-import java.util.Map;
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
 
 public class Catalog {
 
@@ -36,17 +44,37 @@ public class Catalog {
         this.catalogItems = catalogItems;
     }
 
-    public List<CatalogItem> getCatalogItems() {
+    public Collection<CatalogItem> getCatalogItems() {
         return ImmutableList.copyOf(catalogItems.values());
     }
 
-    public List<Repository> getRepositories() {
-        return Lists.transform(getCatalogItems(), new Function<CatalogItem, Repository>() {
+    public Collection<Repository> getRepositories(final String author, final String repoName) {
+        Collection<Repository> repositories = Collections2.transform(getCatalogItems(), new Function<CatalogItem, Repository>() {
             @Override
             public Repository apply(CatalogItem input) {
                 return input.getRepository();
             }
         });
+
+        List<Predicate<Repository>> predicates = new ArrayList<>();
+        if (!StringUtils.isEmpty(author)) {
+            predicates.add(new Predicate<Repository>() {
+                @Override
+                public boolean apply(@Nullable Repository repository) {
+                    return repository != null && StringUtils.equals(repository.getAuthor(), author);
+                }
+            });
+        }
+        if (!StringUtils.isEmpty(repoName)) {
+            predicates.add(new Predicate<Repository>() {
+                @Override
+                public boolean apply(@Nullable Repository repository) {
+                    return repository != null && StringUtils.equals(repository.getRepoName(), repoName);
+                }
+            });
+        }
+
+        return Collections2.filter(repositories, predicates.size() > 0 ? Predicates.and(predicates) : Predicates.<Repository>alwaysTrue());
     }
 
     public CatalogItem getCatalogItem(String ownerName, String repoName) {
