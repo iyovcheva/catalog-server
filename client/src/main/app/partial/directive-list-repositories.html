@@ -22,12 +22,19 @@
                        'one': '1 blueprint available',
                        'other': '{} blueprints available'}"></h2>
 
-<input type="text" class="form-control blueprint-search" placeholder="Search" aria-describedby="search" ng-model="search" />
-<hr />
+<div ng-show="!showSearchThreshold || (showSearchThreshold && results.length >= showSearchThreshold)">
+    <input type="text" class="form-control blueprint-search" placeholder="Search" aria-describedby="search" ng-model="search" />
+    <hr />
+</div>
 
 <ul>
-    <li ng-repeat="repository in repositories | filter:search as results">
-        <a href="#blueprint/{{repository.token}}">{{repository.author}}&nbsp;<span>-</span>&nbsp;{{repository.repoName}}</a>
+    <li ng-repeat="repository in repositories | filter:search as results" ng-switch on="showAuthor">
+        <span ng-switch-when="false">
+            <a href="#blueprints/{{repository.token}}">{{repository.repoName}}</a>
+        </span>
+        <span ng-switch-default>
+            <a href="#blueprints/{{repository.author}}">{{repository.author}}</a>&nbsp;<span>-</span>&nbsp;<a href="#blueprints/{{repository.token}}">{{repository.repoName}}</a>
+        </span>
     </li>
     <li ng-if="results.length == 0">
         No results found...

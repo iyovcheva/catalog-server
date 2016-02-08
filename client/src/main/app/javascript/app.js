@@ -26,7 +26,10 @@
             .when('/blueprints', {
                 templateUrl: 'partial/view-repositories.html'
             })
-            .when('/blueprint/:author/:repo', {
+            .when('/blueprints/:author', {
+                templateUrl: 'partial/view-author.html'
+            })
+            .when('/blueprints/:author/:repo', {
                 templateUrl: 'partial/view-blueprint.html'
             });
     }

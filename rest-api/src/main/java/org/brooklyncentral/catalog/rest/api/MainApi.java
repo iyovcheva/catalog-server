@@ -18,12 +18,17 @@
  */
 package org.brooklyncentral.catalog.rest.api;
 
+import java.util.Collection;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.brooklyncentral.catalog.dto.CatalogItem;
 import org.brooklyncentral.catalog.dto.Repository;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -32,14 +37,16 @@ public interface MainApi {
 
     @GET
     @Path("/repositories")
-    public List<Repository> listRepositories(
-            @QueryParam("regex") @DefaultValue("") String regex,
-            @QueryParam("fragment") @DefaultValue("") String fragment);
+    public Collection<Repository> listRepositories();
 
     @GET
-    @Path("/items/{ownerName}/{repoName}")
+    @Path("/repositories/{author}")
+    public Collection<Repository> listRepositoriesByAuthor(@PathParam("author") final String author);
+
+    @GET
+    @Path("/repositories/{author}/{repoName}")
     public CatalogItem getCatalogItem(
-        @PathParam("ownerName") final String ownerName,
+        @PathParam("author") final String author,
         @PathParam("repoName") final String repoName);
 
 }

@@ -19,17 +19,16 @@
 
 (function() {
     function Repository($resources) {
-        return $resources('@@rest-server-root@@api/repositories', null, {
+        return $resources('@@rest-server-root@@api/repositories/:author', null, {
             query: {
                 method: 'GET',
                 isArray: true
-
             }
         });
     }
 
     function Blueprint($resources) {
-        return $resources('@@rest-server-root@@api/items/:author/:repo', null, {});
+        return $resources('@@rest-server-root@@api/repositories/:author/:repo', null, {});
     }
 
     angular.module('models', ['ngResource'])
