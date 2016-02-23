@@ -50,6 +50,15 @@
         <jetty.version>9.2.9.v20150224</jetty.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <repositories>
         <!-- enable sonatype and apache repos for SNAPSHOTS -->
         <repository>

@@ -37,7 +37,7 @@ public class CatalogScraper {
     }
 
     @SuppressWarnings("unchecked")
-    private static List<String> parseDirectoryYaml(String repoUrl) {
+    public static List<String> parseDirectoryYaml(String repoUrl) {
         Optional<String> directoryYamlString;
         try {
             directoryYamlString = CatalogScraperHelper.getGithubRawText(repoUrl, "directory.yaml", true);
@@ -94,7 +94,7 @@ public class CatalogScraper {
         }
     }
 
-    private static boolean urlExists(String url) {
+    public static boolean urlExists(String url) {
         try {
             new URL(url).openConnection().connect();
             return true;
